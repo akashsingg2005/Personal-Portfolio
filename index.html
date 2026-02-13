@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash Kumar Singh | Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* --- CSS STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg-dark: #020617;
+            --accent-blue: #3b82f6;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #818cf8, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Skills category divider */
+        .skill-group-border {
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        @media (max-width: 768px) {
+            .skill-group-border {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Glowing effect for the hero image */
+        .glow-sphere {
+            position: relative;
+        }
+        .glow-sphere::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 75%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        /* Shadow/Glow specific to the image frame */
+        .profile-glow {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes pulse-glow {
+            from { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+            to { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="text-xl font-extrabold tracking-tighter uppercase">Akash Kumar Singh<span class="text-blue-500">.</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400 items-center">
+                <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
+                <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="px-4 py-2 bg-blue-600/20 border border-blue-500/40 rounded-lg text-blue-400 hover:bg-blue-600 hover:text-white transition-all">Resume</a>
+                <!-- Profile photo logo on the right side -->
+                <div class="w-10 h-10 rounded-lg overflow-hidden border border-blue-500/30 ml-4 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
+                    <img src="Akash's Profile Photo Square frame.png" alt="AS" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Akash+Kumar+Singh&background=2563eb&color=fff'">
+                </div>
+            </div>
+            <a href="tel:+919693018965" class="md:hidden text-blue-400"><i data-lucide="phone"></i></a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center px-6 pt-20">
+        <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold tracking-widest uppercase mb-8">
+                    <span class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+                    Available for Innovation
+                </div>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.85] mb-12 tracking-tighter">
+                    FULL STACK <br>
+                    <span class="gradient-text">DEVELOPER.</span>
+                </h1>
+                <p class="text-xl text-slate-400 max-w-xl leading-relaxed mb-12">
+                    Crafting immersive digital experiences with React, Node.js, and MySQL. 
+                    Specialized in turning complex requirements into elegant, scalable solutions.
+                </p>
+                <div class="flex flex-col gap-8">
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="h-16 px-10 bg-white text-black flex items-center justify-center font-bold rounded-full hover:scale-105 transition-transform">
+                            Explore My Work
+                        </a>
+                        <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="h-16 px-10 border border-white/20 flex items-center justify-center font-bold rounded-full hover:bg-white/10 transition-colors gap-2">
+                            <i data-lucide="file-text" class="w-5"></i> View Resume
+                        </a>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/akashsingg2005/" target="_blank" title="GitHub" class="w-16 h-16 border border-white/20 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors">
+                            <i data-lucide="github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/akashsingh2005/" target="_blank" title="LinkedIn" class="w-16 h-16 border border-white/20 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors">
+                            <i data-lucide="linkedin"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/akashsingg2005/" target="_blank" title="LeetCode" class="w-16 h-16 border border-white/20 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors text-yellow-500">
+                            <i data-lucide="code-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Big Glowing Circular Profile Photo -->
+            <div class="reveal flex justify-center lg:justify-end">
+                <div class="glow-sphere relative">
+                    <div class="w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden profile-glow shadow-2xl transition-all duration-500 hover:scale-[1.02]">
+                        <img src="Akash's Profile Photo Square frame.png" alt="Akash Kumar Singh" class="w-full h-full object-cover transition-all duration-700" onerror="this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div class="reveal">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[3rem] blur opacity-25 group-hover:opacity-60 transition duration-1000"></div>
+                    <div class="relative aspect-square rounded-[2.5rem] overflow-hidden bg-slate-900 border border-white/10 shadow-2xl">
+                        <img src=" profile .png" alt="Akash Kumar Singh" class="w-full h-full object-cover transition-all duration-700" onerror="this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800'">
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-500 mb-4">The Developer</h2>
+                <h3 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">Bridging Backend Logic with Seamless Frontend UX.</h3>
+                <p class="text-slate-400 text-lg leading-relaxed mb-8">
+                    I am a B.Tech CSE student at Haridwar University. My expertise lies in HTML, CSS, JavaScript, React, MySQL, and Node.js. 
+                    I focus on building responsive, high-performance applications that provide intuitive user experiences.
+                </p>
+                <div class="grid grid-cols-2 gap-8 mb-10 text-sm">
+                    <div>
+                        <h4 class="font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="book" class="w-4"></i> Education</h4>
+                        <p class="text-slate-500">B.Tech CSE, Haridwar University</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white mb-2 flex items-center gap-2"><i data-lucide="award" class="w-4"></i> Achievements</h4>
+                        <p class="text-slate-500">1st Place AI Quiz, Cultural Fest Designer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Systematic Skills Section (Horizontal Layout) -->
+    <section class="py-20 px-6 bg-slate-950/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-500 mb-4">Technical Stack</h2>
+                <h3 class="text-4xl md:text-5xl font-bold">My Expertise</h3>
+            </div>
+            
+            <div class="reveal">
+                <div class="glass rounded-[3rem] p-10 overflow-hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+                        <!-- Development Core -->
+                        <div class="p-8 skill-group-border">
+                            <h4 class="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-6">Development</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm font-semibold">Web Development</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">React</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">HTML CSS JavaScript</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">Java Development</span>
+                            </div>
+                        </div>
+                        <!-- Architecture & Data -->
+                        <div class="p-8 skill-group-border">
+                            <h4 class="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-6">Backend & Data</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm font-semibold">Database Management</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">RESTful API design</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">Python Programming</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">MySQL / Node.js</span>
+                            </div>
+                        </div>
+                        <!-- Leadership & Design -->
+                        <div class="p-8">
+                            <h4 class="text-blue-400 text-[10px] font-black uppercase tracking-[0.3em] mb-6">Creative & Management</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm font-semibold">Project Management</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">Team Leadership</span>
+                                <span class="text-sm text-slate-500">•</span>
+                                <span class="text-sm font-semibold">Graphic Designing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
+                <div>
+                    <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-500 mb-4">Portfolio Work</h2>
+                    <h3 class="text-5xl font-bold">Featured Projects</h3>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Project 1 -->
+                <div class="reveal project-card glass p-8 rounded-[2rem]">
+                    <div class="h-12 w-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-400 mb-6">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Better City Resolution</h4>
+                    <p class="text-slate-400 text-xs mb-8 leading-relaxed">Urban issue reporting platform created during Smart India Hackathon.</p>
+                    <div class="flex gap-4">
+                        <a href="https://better-city-resolution.vercel.app/" target="_blank" class="text-blue-400 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">Demo <i data-lucide="external-link" class="w-3"></i></a>
+                        <a href="https://github.com/akashsingg2005/Better-City-Resolution" target="_blank" class="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">Repo <i data-lucide="github" class="w-3"></i></a>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="reveal project-card glass p-8 rounded-[2rem]">
+                    <div class="h-12 w-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-400 mb-6">
+                        <i data-lucide="qr-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">QR Generator</h4>
+                    <p class="text-slate-400 text-xs mb-8 leading-relaxed">Personal utility for fast, custom QR code generation.</p>
+                    <div class="flex gap-4">
+                        <a href="https://qr-code-generator-babusaheb.vercel.app/" target="_blank" class="text-blue-400 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">Demo <i data-lucide="external-link" class="w-3"></i></a>
+                        <a href="https://github.com/akashsingg2005/qr-code-generator-babusaheb" target="_blank" class="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">Repo <i data-lucide="github" class="w-3"></i></a>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="reveal project-card glass p-8 rounded-[2rem]">
+                    <div class="h-12 w-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-400 mb-6">
+                        <i data-lucide="home"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">PG Life</h4>
+                    <p class="text-slate-400 text-xs mb-8 leading-relaxed">A full-stack accommodation finding system for students.</p>
+                    <div class="flex gap-4">
+                        <a href="https://github.com/akashsingg2005/PG-Life" target="_blank" class="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">Repo <i data-lucide="github" class="w-3"></i></a>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="reveal project-card glass p-8 rounded-[2rem]">
+                    <div class="h-12 w-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-400 mb-6">
+                        <i data-lucide="layout"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Personal Portfolio</h4>
+                    <p class="text-slate-400 text-xs mb-8 leading-relaxed">This modern portfolio featuring high-end animations.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-blue-400 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">Demo <i data-lucide="external-link" class="w-3"></i></a>
+                        <a href="https://github.com/akashsingg2005/MyPortfolio" target="_blank" class="text-slate-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">Repo <i data-lucide="github" class="w-3"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Let's Talk Section (Simple CTAs) -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto glass rounded-[3rem] p-12 text-center reveal">
+            <h2 class="text-4xl md:text-6xl font-black mb-10 tracking-tighter uppercase">Let's Talk</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-6 items-center">
+                <a href="tel:+919693018965" class="w-full md:w-auto px-10 py-5 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform flex items-center justify-center gap-3 shadow-lg">
+                    <i data-lucide="phone" class="w-5"></i> Call Now
+                </a>
+                <a href="mailto:akashsingg2005@gmail.com" class="w-full md:w-auto px-10 py-5 border border-white/20 font-bold rounded-full hover:bg-white/5 transition-colors flex items-center justify-center gap-3">
+                    <i data-lucide="mail" class="w-5"></i> Mail Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section (Full Integrated Form) -->
+    <section id="contact" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-500 mb-4">Direct Message</h2>
+                <h3 class="text-4xl font-bold">Contact Us</h3>
+            </div>
+            
+            <div class="glass p-10 md:p-16 rounded-[3rem] relative">
+                <form action="https://formspree.io/f/mjgeyddq" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Your Name</label>
+                        <input type="text" name="name" required placeholder="Akash" class="w-full bg-slate-900/50 border border-white/10 p-5 rounded-2xl focus:outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Email Address</label>
+                        <input type="email" name="email" required placeholder="akash@example.com" class="w-full bg-slate-900/50 border border-white/10 p-5 rounded-2xl focus:outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                    <div class="md:col-span-2 space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Message</label>
+                        <textarea name="message" rows="5" required placeholder="How can I help you?" class="w-full bg-slate-900/50 border border-white/10 p-5 rounded-2xl focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+                    </div>
+                    <div class="md:col-span-2 mt-4">
+                        <button type="submit" class="w-full py-6 bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all shadow-[0_0_30px_rgba(37,99,235,0.2)] hover:shadow-blue-500/40">
+                            Send Message <i data-lucide="send" class="w-4"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 px-6 border-t border-white/5 text-center">
+        <div class="text-xs font-bold text-slate-600 uppercase tracking-widest leading-loose">
+            Akash Kumar Singh © 2026<br>
+            Full Stack Developer | Roorkee, Uttarakhand
+        </div>
+        <div class="flex justify-center gap-6 mt-8">
+            <a href="https://github.com/akashsingg2005/" target="_blank" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="github"></i></a>
+            <a href="https://www.linkedin.com/in/akashsingh2005/" target="_blank" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="linkedin"></i></a>
+            <a href="https://leetcode.com/u/akashsingg2005/" target="_blank" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="code-2"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Reveal animations
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // Neural Canvas
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 11000;
+            for (let i = 0; i < numberOfParticles; i++) particles.push(new Particle());
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+                let dx = mouse.x - this.x; let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                if (distance < mouse.radius) {
+                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 1.5;
+                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 1.5;
+                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 1.5;
+                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 1.5;
+                }
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+
+        function connect() {
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                    + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${(1 - distance/20000) * 0.15})`;
+                        ctx.lineWidth = 0.8; ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connect();
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('resize', initCanvas);
+        window.addEventListener('mouseout', () => { mouse.x = undefined; mouse.y = undefined; });
+
+        initCanvas();
+        animate();
+    </script>
+</body>
+</html>
