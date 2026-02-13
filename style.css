@@ -1,0 +1,95 @@
+/* --- CSS STYLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+:root {
+    --bg-dark: #020617;
+    --accent-blue: #3b82f6;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-dark);
+    color: #f8fafc;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.glass {
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#neural-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-card {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-blue);
+}
+
+.gradient-text {
+    background: linear-gradient(to right, #60a5fa, #818cf8, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Skills category divider */
+.skill-group-border {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 768px) {
+    .skill-group-border {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Glowing effect for the hero image */
+.glow-sphere {
+    position: relative;
+}
+.glow-sphere::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 75%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse-glow 3s infinite alternate;
+}
+
+/* Shadow/Glow specific to the image frame */
+.profile-glow {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(59, 130, 246, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes pulse-glow {
+    from { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+    to { transform: translate(-50%, -50%) scale(1.2); opacity: 0.7; }
+}
