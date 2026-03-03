@@ -1,7 +1,5 @@
-        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Reveal animations on scroll
         const reveals = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -13,7 +11,6 @@
 
         reveals.forEach(el => revealObserver.observe(el));
 
-        // Neural Network Background Logic
         const canvas = document.getElementById('neural-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -23,7 +20,6 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particles = [];
-            // Adjust density based on screen size
             let numberOfParticles = (canvas.width * canvas.height) / 11000;
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push(new Particle());
@@ -45,7 +41,6 @@
                 if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
                 if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
 
-                // Mouse interaction
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
                 let distance = Math.sqrt(dx * dx + dy * dy);

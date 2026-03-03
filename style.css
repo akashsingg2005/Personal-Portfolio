@@ -57,7 +57,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Skills category divider */
         .skill-group-border {
             border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -68,7 +67,6 @@
             }
         }
 
-        /* Glowing effect for the hero image */
         .glow-sphere {
             position: relative;
         }
@@ -86,7 +84,6 @@
             animation: pulse-glow 3s infinite alternate;
         }
 
-        /* Shadow/Glow specific to the image frame */
         .profile-glow {
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.3), inset 0 0 20px rgba(59, 130, 246, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.1);
