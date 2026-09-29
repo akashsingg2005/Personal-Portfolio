@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Icons
+    // 1. Initialize Lucide Icons (as fallback)
     if (window.lucide) {
         lucide.createIcons();
     }
@@ -23,23 +23,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Fresh Project Filtering & Search
-    const freshTabs = document.querySelectorAll('.fresh-tab');
-    const freshCards = document.querySelectorAll('.fresh-project-card');
-    const freshSearch = document.getElementById('fresh-search-input');
+    // 3. Project Filter & Search System
+    const filterTabs = document.querySelectorAll('.gradient-tab');
+    const projectCards = document.querySelectorAll('.project-card');
+    const searchInput = document.getElementById('gradient-search');
 
-    let currentCat = 'all';
-    let currentQuery = '';
+    let currentFilter = 'all';
+    let searchQuery = '';
 
-    function updateFreshProjects() {
-        freshCards.forEach(card => {
-            const category = card.getAttribute('data-cat');
+    function filterProjects() {
+        projectCards.forEach(card => {
+            const category = card.getAttribute('data-category');
             const tags = (card.getAttribute('data-tags') || '').toLowerCase();
             const title = card.querySelector('h3') ? card.querySelector('h3').textContent.toLowerCase() : '';
             const desc = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
 
-            const matchCat = (currentCat === 'all' || category === currentCat);
-            const matchSearch = currentQuery === '' || title.includes(currentQuery) || desc.includes(currentQuery) || tags.includes(currentQuery);
+            const matchCat = (currentFilter === 'all' || category === currentFilter);
+            const matchSearch = searchQuery === '' || title.includes(searchQuery) || desc.includes(searchQuery) || tags.includes(searchQuery);
 
             if (matchCat && matchSearch) {
                 card.style.display = 'flex';
@@ -51,23 +51,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    freshTabs.forEach(tab => {
+    filterTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            freshTabs.forEach(t => t.classList.remove('active'));
+            filterTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            currentCat = tab.getAttribute('data-fresh-filter');
-            updateFreshProjects();
+            currentFilter = tab.getAttribute('data-filter');
+            filterProjects();
         });
     });
 
-    if (freshSearch) {
-        freshSearch.addEventListener('input', (e) => {
-            currentQuery = e.target.value.toLowerCase().trim();
-            updateFreshProjects();
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            filterProjects();
         });
     }
 
-    // 4. Dynamic Interactive Experience Reader
+    // 4. Interactive Experience Reader
     const expData = [
         {
             period: "Jun 2026 – Jul 2026",
@@ -141,14 +141,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     expPeriod.textContent = item.period;
                     expTitle.textContent = item.title;
                     expOrg.textContent = item.org;
-
                     expDetails.innerHTML = item.details.map(d => `<p>• ${d}</p>`).join('');
                 }
             });
         });
     }
 
-    // 5. Active Nav Observer
+    // 5. Active Navigation Link Scroll Highlighting
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
