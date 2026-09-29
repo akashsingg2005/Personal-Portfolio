@@ -4,13 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
-    // 2. Mobile Navigation Drawer Toggle
+    // 2. Mobile Navigation Drawer Toggle & Outside Click Closing Listener
     const menuToggle = document.getElementById('menu-toggle');
     const mobileNav = document.getElementById('mobile-nav');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
     if (menuToggle && mobileNav) {
-        menuToggle.addEventListener('click', () => {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             mobileNav.classList.toggle('hidden');
             mobileNav.classList.toggle('flex');
         });
@@ -20,6 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileNav.classList.add('hidden');
                 mobileNav.classList.remove('flex');
             });
+        });
+
+        // Close mobile drawer when user clicks anywhere outside of menu and toggle button
+        document.addEventListener('click', (e) => {
+            if (!mobileNav.classList.contains('hidden')) {
+                const isClickInsideNav = mobileNav.contains(e.target);
+                const isClickOnToggle = menuToggle.contains(e.target);
+
+                if (!isClickInsideNav && !isClickOnToggle) {
+                    mobileNav.classList.add('hidden');
+                    mobileNav.classList.remove('flex');
+                }
+            }
         });
     }
 
