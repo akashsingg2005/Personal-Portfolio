@@ -54,14 +54,16 @@
         <div class="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
     </div>
 
-    <!-- Floating Glass Navbar -->
-    <header class="fixed top-5 inset-x-0 z-50 px-4">
-        <div class="max-w-6xl mx-auto bg-white/85 backdrop-blur-2xl border border-white/80 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.06)] px-6 py-3 flex items-center justify-between">
-            <a href="#home" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-heading font-black text-sm shadow-md group-hover:scale-110 transition-transform">
-                    AS
+    <!-- Floating Glass Navbar with Profile Photo Branding -->
+    <header class="fixed top-4 inset-x-0 z-50 px-3 sm:px-4">
+        <div class="max-w-6xl mx-auto bg-white/90 backdrop-blur-2xl border border-white/80 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.06)] px-3.5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
+            
+            <!-- Brand with Actual Profile Photo -->
+            <a href="#home" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-blue-600/40 p-0.5 bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 shadow-md group-hover:scale-110 transition-transform shrink-0">
+                    <img src="Akash's Profile Photo Square frame.png" alt="Akash Kumar Singh" class="w-full h-full object-cover rounded-full bg-white" onerror="this.src='https://ui-avatars.com/api/?name=Akash+Kumar+Singh&background=2563eb&color=fff'">
                 </div>
-                <span class="font-heading font-extrabold text-slate-900 tracking-tight text-base sm:text-lg">
+                <span class="font-heading font-extrabold text-slate-900 tracking-tight text-xs sm:text-base md:text-lg">
                     AKASH KUMAR SINGH<span class="text-blue-600">.</span>
                 </span>
             </a>
@@ -75,18 +77,18 @@
                 <a href="#contact" class="hover:text-blue-600 transition-colors nav-link">Contact</a>
             </nav>
 
-            <!-- Status Badge + Resume CTA -->
-            <div class="flex items-center gap-3">
-                <div class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full text-xs font-bold text-emerald-700 shadow-sm">
+            <!-- Status Badge + Resume CTA + Mobile Menu Toggle -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <div class="hidden lg:flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full text-xs font-bold text-emerald-700 shadow-sm">
                     <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span>
                     Available for Roles
                 </div>
-                <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="px-5 py-2.5 bg-slate-900 hover:bg-blue-600 text-white text-xs font-bold rounded-full transition-all shadow-md hover:shadow-lg flex items-center gap-2">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="px-3.5 sm:px-5 py-2 sm:py-2.5 bg-slate-900 hover:bg-blue-600 text-white text-[11px] sm:text-xs font-bold rounded-full transition-all shadow-md hover:shadow-lg flex items-center gap-1.5 sm:gap-2">
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                     <span>Resume</span>
                 </a>
-                <button id="menu-toggle" class="md:hidden text-slate-800 p-2 focus:outline-none" aria-label="Toggle Navigation Menu">
-                    <svg class="w-6 h-6 stroke-current pointer-events-none" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <button id="menu-toggle" class="md:hidden text-slate-800 p-1.5 sm:p-2 focus:outline-none" aria-label="Toggle Navigation Menu">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6 stroke-current pointer-events-none" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
             </div>
         </div>
@@ -168,10 +170,10 @@
                         
                         <!-- Interactive Prominent Profile Avatar Button -->
                         <div class="relative group/avatar cursor-pointer text-center space-y-4" id="profile-avatar-trigger" title="Click to Expand Photo">
-                            <div class="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto rounded-3xl overflow-hidden p-1.5 bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 shadow-xl group-hover/avatar:scale-105 transition-all duration-300">
+                            <div class="relative w-48 h-48 sm:w-56 sm:h-56 mx-auto rounded-3xl overflow-hidden p-1.5 bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 shadow-2xl group-hover/avatar:scale-105 transition-all duration-300">
                                 <img src="Akash's Profile Photo Square frame.png" alt="Akash Kumar Singh" class="w-full h-full object-cover rounded-2xl bg-white" onerror="this.src='https://ui-avatars.com/api/?name=Akash+Kumar+Singh&background=2563eb&color=fff&size=512'">
                                 <div class="absolute inset-0 bg-blue-900/20 opacity-0 group-hover/avatar:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-                                    <span class="px-3 py-1 bg-white/90 text-blue-600 font-bold text-xs rounded-full shadow-lg flex items-center gap-1.5">
+                                    <span class="px-3.5 py-1.5 bg-white/95 text-blue-600 font-extrabold text-xs rounded-full shadow-lg flex items-center gap-1.5">
                                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg> Expand
                                     </span>
                                 </div>
@@ -751,7 +753,7 @@
 
                     <div class="bg-white/90 border border-slate-200 p-7 rounded-3xl space-y-4 hover:shadow-xl transition-all">
                         <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex items-center justify-center shadow-md">
-                            <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 02-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 02 2z"/></svg>
+                            <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         </div>
                         <h4 class="font-heading font-extrabold text-lg text-slate-900">AI & Deployment</h4>
                         <div class="flex flex-wrap gap-2 text-xs font-bold text-slate-700">
@@ -873,7 +875,7 @@
 
                     </div>
 
-                    <!-- Right Enhanced Form: Professional Fields & Stylish High-Contrast Submit CTA -->
+                    <!-- Right Enhanced Form: Professional Fields & High-Impact Thick Submit CTA -->
                     <div class="lg:col-span-8 bg-white/95 backdrop-blur-2xl border border-slate-200 p-8 sm:p-12 rounded-3xl shadow-xl relative overflow-hidden">
                         
                         <form action="https://formspree.io/f/mjgeyddq" method="POST" class="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-10" id="contact-form">
@@ -914,11 +916,11 @@
                                 <textarea name="message" rows="5" required placeholder="Provide details about your project requirements, scope, or job opportunity..." class="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl text-xs text-slate-900 focus:outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all resize-none font-medium"></textarea>
                             </div>
 
-                            <!-- Submit Button: Highly Appropriate & Stylish Blue/Indigo Pill CTA -->
+                            <!-- PROMINENT HIGH-HEIGHT THICK SUBMIT CTA BUTTON -->
                             <div class="sm:col-span-2 pt-2">
-                                <button type="submit" id="contact-submit-btn" class="w-full py-4.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-2xl text-xs tracking-wider uppercase transition-all shadow-[0_10px_25px_rgba(37,99,235,0.35)] hover:shadow-blue-600/50 flex items-center justify-center gap-3 group cursor-pointer">
+                                <button type="submit" id="contact-submit-btn" class="w-full h-14 sm:h-16 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-2xl text-sm sm:text-base tracking-wider uppercase transition-all shadow-[0_10px_25px_rgba(37,99,235,0.35)] hover:shadow-blue-600/50 flex items-center justify-center gap-3 group cursor-pointer border-0">
                                     <span>Send Message Now</span>
-                                    <svg class="w-4 h-4 stroke-current group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                    <svg class="w-5 h-5 stroke-current group-hover:translate-x-1.5 transition-transform" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                                 </button>
                             </div>
 
