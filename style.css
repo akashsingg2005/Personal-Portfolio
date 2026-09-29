@@ -11,52 +11,44 @@ h1, h2, h3, h4, .font-heading {
     font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Floating Blob Keyframe Animations for Pink, Green, Blue, Yellow */
+/* Soft Ambient Floating Blob Animations (Yellow Removed, Rose/Blue/Emerald/Violet softened) */
 @keyframes floatBlob1 {
     0%, 100% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(60px, -50px) scale(1.15); }
-    66% { transform: translate(-30px, 40px) scale(0.9); }
+    33% { transform: translate(40px, -30px) scale(1.08); }
+    66% { transform: translate(-20px, 30px) scale(0.95); }
 }
 
 @keyframes floatBlob2 {
     0%, 100% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(-50px, 60px) scale(1.1); }
-    66% { transform: translate(40px, -40px) scale(0.95); }
-}
-
-@keyframes floatBlob3 {
-    0%, 100% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(40px, 50px) scale(1.1); }
-    66% { transform: translate(-60px, -30px) scale(0.9); }
+    33% { transform: translate(-30px, 40px) scale(1.05); }
+    66% { transform: translate(30px, -20px) scale(0.95); }
 }
 
 @keyframes floatBlob4 {
     0%, 100% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(-40px, -60px) scale(1.15); }
-    66% { transform: translate(50px, 30px) scale(0.95); }
+    33% { transform: translate(-30px, -40px) scale(1.08); }
+    66% { transform: translate(40px, 20px) scale(0.95); }
 }
 
-.animate-blob1 { animation: floatBlob1 18s ease-in-out infinite; }
-.animate-blob2 { animation: floatBlob2 20s ease-in-out infinite; }
-.animate-blob3 { animation: floatBlob3 22s ease-in-out infinite; }
-.animate-blob4 { animation: floatBlob4 24s ease-in-out infinite; }
+.animate-blob1 { animation: floatBlob1 20s ease-in-out infinite; }
+.animate-blob2 { animation: floatBlob2 22s ease-in-out infinite; }
+.animate-blob4 { animation: floatBlob4 26s ease-in-out infinite; }
 
-/* Subtle Background Grid Pattern */
+/* Background Grid Pattern */
 .bg-grid-pattern {
-    background-image: radial-gradient(#3b82f6 0.75px, transparent 0.75px), radial-gradient(#ec4899 0.75px, transparent 0.75px);
+    background-image: radial-gradient(#2563eb 0.75px, transparent 0.75px);
     background-size: 32px 32px;
-    background-position: 0 0, 16px 16px;
 }
 
-/* Gradient Tabs */
+/* Filter Tabs */
 .gradient-tab {
     padding: 0.55rem 1.25rem;
     font-size: 0.75rem;
     font-weight: 800;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    border: 1px solid rgba(226, 232, 240, 0.9);
     color: #475569;
     transition: all 0.25s ease;
     cursor: pointer;
@@ -68,10 +60,10 @@ h1, h2, h3, h4, .font-heading {
     transform: translateY(-1px);
 }
 .gradient-tab.active {
-    background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #2563eb 100%);
-    border-color: transparent;
+    background: #2563eb;
+    border-color: #2563eb;
     color: #ffffff;
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.35);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.3);
 }
 
 /* Experience Tab Buttons */
@@ -82,28 +74,29 @@ h1, h2, h3, h4, .font-heading {
     cursor: pointer;
 }
 .exp-btn:hover {
-    border-color: #ec4899;
+    border-color: #2563eb;
     background: #ffffff;
 }
 .exp-btn.active {
     background: #ffffff;
-    border-color: #ec4899;
+    border-color: #2563eb;
     border-left-width: 4px;
-    box-shadow: 0 10px 25px rgba(236, 72, 153, 0.12);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.1);
 }
 
-/* Project Card Micro-Interactions */
+/* Project Card Hover Effects */
 .project-card {
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .project-card:hover {
-    transform: translateY(-7px);
+    transform: translateY(-6px);
 }
 
 /* Nav Link Active Indicator */
 .nav-link.active {
-    color: #ec4899;
+    color: #2563eb;
     position: relative;
+    font-weight: 800;
 }
 .nav-link.active::after {
     content: '';
@@ -112,6 +105,6 @@ h1, h2, h3, h4, .font-heading {
     left: 0;
     width: 100%;
     height: 2.5px;
-    background: linear-gradient(to right, #ec4899, #3b82f6);
+    background: #2563eb;
     border-radius: 2px;
 }

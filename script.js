@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Lucide Icons (as fallback)
+    // 1. Fallback Lucide Icons Initialization
     if (window.lucide) {
         lucide.createIcons();
     }
 
-    // 2. Mobile Menu Toggle
+    // 2. Mobile Navigation Drawer Toggle
     const menuToggle = document.getElementById('menu-toggle');
     const mobileNav = document.getElementById('mobile-nav');
     const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -23,7 +23,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Project Filter & Search System
+    // 3. Profile Picture Expandable Lightbox Modal
+    const avatarTrigger = document.getElementById('profile-avatar-trigger');
+    const profileModal = document.getElementById('profile-modal');
+    const closeModalBtn = document.getElementById('close-profile-modal');
+    const modalContactLink = document.getElementById('modal-contact-link');
+
+    if (avatarTrigger && profileModal) {
+        avatarTrigger.addEventListener('click', () => {
+            profileModal.classList.remove('hidden');
+            profileModal.classList.add('flex');
+        });
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                profileModal.classList.add('hidden');
+                profileModal.classList.remove('flex');
+            });
+        }
+
+        if (modalContactLink) {
+            modalContactLink.addEventListener('click', () => {
+                profileModal.classList.add('hidden');
+                profileModal.classList.remove('flex');
+            });
+        }
+
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) {
+                profileModal.classList.add('hidden');
+                profileModal.classList.remove('flex');
+            }
+        });
+    }
+
+    // 4. Project Filter & Live Search
     const filterTabs = document.querySelectorAll('.gradient-tab');
     const projectCards = document.querySelectorAll('.project-card');
     const searchInput = document.getElementById('gradient-search');
@@ -67,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Interactive Experience Reader
+    // 5. Interactive Experience Reader
     const expData = [
         {
             period: "Jun 2026 – Jul 2026",
@@ -147,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Active Navigation Link Scroll Highlighting
+    // 6. Active Navigation Link Scroll Highlighting
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
