@@ -1,41 +1,154 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Initialize Lucide Icons
+    // 1. Initialize Icons
     if (window.lucide) {
         lucide.createIcons();
     }
 
-    // 2. Scroll Reveal Observer
-    const reveals = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.1 });
+    // 2. Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    reveals.forEach(el => revealObserver.observe(el));
-
-    // 3. Mobile Navigation Drawer Toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
+    if (menuToggle && mobileNav) {
+        menuToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+            mobileNav.classList.toggle('flex');
         });
 
-        mobileNavLinks.forEach(link => {
+        mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
+                mobileNav.classList.add('hidden');
+                mobileNav.classList.remove('flex');
             });
         });
     }
 
-    // 4. Active Section Nav Link Highlighting
+    // 3. Fresh Project Filtering & Search
+    const freshTabs = document.querySelectorAll('.fresh-tab');
+    const freshCards = document.querySelectorAll('.fresh-project-card');
+    const freshSearch = document.getElementById('fresh-search-input');
+
+    let currentCat = 'all';
+    let currentQuery = '';
+
+    function updateFreshProjects() {
+        freshCards.forEach(card => {
+            const category = card.getAttribute('data-cat');
+            const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+            const title = card.querySelector('h3') ? card.querySelector('h3').textContent.toLowerCase() : '';
+            const desc = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
+
+            const matchCat = (currentCat === 'all' || category === currentCat);
+            const matchSearch = currentQuery === '' || title.includes(currentQuery) || desc.includes(currentQuery) || tags.includes(currentQuery);
+
+            if (matchCat && matchSearch) {
+                card.style.display = 'flex';
+                card.style.opacity = '1';
+            } else {
+                card.style.display = 'none';
+                card.style.opacity = '0';
+            }
+        });
+    }
+
+    freshTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            freshTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentCat = tab.getAttribute('data-fresh-filter');
+            updateFreshProjects();
+        });
+    });
+
+    if (freshSearch) {
+        freshSearch.addEventListener('input', (e) => {
+            currentQuery = e.target.value.toLowerCase().trim();
+            updateFreshProjects();
+        });
+    }
+
+    // 4. Dynamic Interactive Experience Reader
+    const expData = [
+        {
+            period: "Jun 2026 – Jul 2026",
+            title: "Web Developer Intern",
+            org: "Prabandhan’26, IIT Kanpur & EISystems Services",
+            details: [
+                "Developed ExpenseFlow Pro, a personal finance and expense management system using HTML5, CSS3, Bootstrap 5, and JavaScript.",
+                "Implemented transaction management, dashboard analytics, income/expense calculations, search/filter functionality, reports, and LocalStorage-based data handling."
+            ]
+        },
+        {
+            period: "May 2026 – Present",
+            title: "Freelance Full Stack Developer",
+            org: "Chakradhari Traders ERP (Client Project)",
+            details: [
+                "Delivered a production-ready ERP solution for a real client, digitizing inventory, billing, sales, purchase, and customer management processes.",
+                "Reduced manual business record maintenance by centralizing 500+ records into a secure MongoDB database.",
+                "Coordinated directly with the client to gather requirements, implement requested features, and deploy the application successfully."
+            ]
+        },
+        {
+            period: "Apr 2026 – Jun 2026",
+            title: "Python Full Stack Development Virtual Intern",
+            org: "AICTE EduSkills Academy",
+            details: [
+                "Completed an 8-week Python Full Stack Development with Project Virtual Internship.",
+                "Built full-stack applications using Python, Django, HTML, CSS, JavaScript, and MySQL."
+            ]
+        },
+        {
+            period: "Dec 2025 – Mar 2026",
+            title: "Python Full Stack Developer Intern",
+            org: "EduSkills Academy",
+            details: [
+                "Developed responsive web applications and integrated backend with MySQL."
+            ]
+        },
+        {
+            period: "Jun 2025 – Jul 2025",
+            title: "Full Stack Development Intern",
+            org: "CertED Technologies – Haridwar University",
+            details: [
+                "Built responsive webpages and integrated frontend components with backend functionality during practical training.",
+                "Collaborated on multiple full-stack development tasks using HTML, CSS, JavaScript, and databases."
+            ]
+        },
+        {
+            period: "Sep 2025 – Nov 2025",
+            title: "Team Leader – Smart India Hackathon",
+            org: "Smart City Solution Project",
+            details: [
+                "Led a team of four members to build a crowdsourced smart city issue reporting and resolution solution."
+            ]
+        }
+    ];
+
+    const expBtns = document.querySelectorAll('.exp-btn');
+    const expPeriod = document.getElementById('exp-period');
+    const expTitle = document.getElementById('exp-title');
+    const expOrg = document.getElementById('exp-org');
+    const expDetails = document.getElementById('exp-details');
+
+    if (expBtns.length > 0) {
+        expBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                expBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const item = expData[index];
+                if (item) {
+                    expPeriod.textContent = item.period;
+                    expTitle.textContent = item.title;
+                    expOrg.textContent = item.org;
+
+                    expDetails.innerHTML = item.details.map(d => `<p>• ${d}</p>`).join('');
+                }
+            });
+        });
+    }
+
+    // 5. Active Nav Observer
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -58,158 +171,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // 5. Project Filtering & Live Search System
-    const filterBtns = document.querySelectorAll('.filter-btn-light');
-    const projectCards = document.querySelectorAll('.project-card');
-    const searchInput = document.getElementById('project-search');
-
-    let activeFilter = 'all';
-    let searchQuery = '';
-
-    function filterProjects() {
-        projectCards.forEach(card => {
-            const category = card.getAttribute('data-category');
-            const tech = (card.getAttribute('data-tech') || '').toLowerCase();
-            const title = card.querySelector('h4') ? card.querySelector('h4').textContent.toLowerCase() : '';
-            const description = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
-
-            const matchesCategory = (activeFilter === 'all' || category === activeFilter);
-            const matchesSearch = searchQuery === '' || 
-                title.includes(searchQuery) || 
-                description.includes(searchQuery) || 
-                tech.includes(searchQuery);
-
-            if (matchesCategory && matchesSearch) {
-                card.style.display = 'flex';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 50);
-            } else {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 300);
-            }
-        });
-    }
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeFilter = btn.getAttribute('data-filter');
-            filterProjects();
-        });
-    });
-
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value.toLowerCase().trim();
-            filterProjects();
-        });
-    }
-
-    // 6. Interactive Light Particle Neural Canvas
-    const canvas = document.getElementById('neural-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let mouse = { x: null, y: null, radius: 140 };
-
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles = [];
-            let numberOfParticles = Math.floor((canvas.width * canvas.height) / 14000);
-            for (let i = 0; i < numberOfParticles; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.6;
-                this.speedX = (Math.random() - 0.5) * 0.4;
-                this.speedY = (Math.random() - 0.5) * 0.4;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-
-                if (mouse.x && mouse.y) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 1.2;
-                        if (mouse.x > this.x && this.x > this.size * 10) this.x -= 1.2;
-                        if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 1.2;
-                        if (mouse.y > this.y && this.y > this.size * 10) this.y -= 1.2;
-                    }
-                }
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(37, 99, 235, 0.25)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function connect() {
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a; b < particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let distance = dx * dx + dy * dy;
-                    let maxDistance = (canvas.width / 7) * (canvas.height / 7);
-
-                    if (distance < maxDistance && distance < 18000) {
-                        let opacity = (1 - distance / 18000) * 0.12;
-                        ctx.strokeStyle = `rgba(37, 99, 235, ${opacity})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-            }
-            connect();
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        window.addEventListener('resize', () => {
-            initCanvas();
-        });
-
-        window.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        initCanvas();
-        animate();
-    }
 });

@@ -3,1038 +3,876 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akash Kumar Singh | Full Stack & AI Developer</title>
+    <title>Akash Kumar Singh — Full Stack & AI Developer</title>
     <link rel="icon" href="cv.png">
-    <!-- Google Fonts -->
+    
+    <!-- Modern Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb',
-                        secondary: '#4f46e5',
-                        lightBg: '#f8fafc',
-                        cardBg: '#ffffff'
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        zincCustom: {
+                            50: '#fafafa',
+                            100: '#f4f4f5',
+                            200: '#e4e4e7',
+                            300: '#d4d4d8',
+                            400: '#a1a1aa',
+                            600: '#52525b',
+                            800: '#27272a',
+                            900: '#18181b',
+                            950: '#09090b',
+                        }
                     },
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
                     }
                 }
             }
         }
     </script>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-blue-600 selection:text-white">
+<body class="bg-zincCustom-50 text-zincCustom-800 font-sans antialiased overflow-x-hidden selection:bg-brand-600 selection:text-white">
 
-    <canvas id="neural-canvas"></canvas>
+    <!-- Background Ambient Glow & Grid -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -left-40 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bg-grid-pattern inset-0 opacity-[0.03]"></div>
+    </div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-slate-200/80 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#home" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+    <!-- Floating Navbar -->
+    <header class="fixed top-5 inset-x-0 z-50 px-4">
+        <div class="max-w-5xl mx-auto bg-white/80 backdrop-blur-xl border border-zincCustom-200/80 rounded-full shadow-lg shadow-zincCustom-900/5 px-6 py-3 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-2.5 group">
+                <div class="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center text-white font-heading font-bold text-xs shadow-sm group-hover:scale-105 transition-transform">
                     AS
                 </div>
-                <span class="text-xl font-extrabold tracking-tighter uppercase text-slate-900">
-                    Akash Kumar Singh<span class="text-blue-600">.</span>
+                <span class="font-heading font-bold text-zincCustom-900 tracking-tight text-sm sm:text-base">
+                    AKASH KUMAR SINGH
                 </span>
             </a>
 
-            <!-- Desktop Menu -->
-            <div class="hidden lg:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-600 items-center">
-                <a href="#home" class="hover:text-blue-600 transition-colors nav-link active">Home</a>
-                <a href="#about" class="hover:text-blue-600 transition-colors nav-link">About</a>
-                <a href="#experience" class="hover:text-blue-600 transition-colors nav-link">Experience</a>
-                <a href="#skills" class="hover:text-blue-600 transition-colors nav-link">Skills</a>
-                <a href="#projects" class="hover:text-blue-600 transition-colors nav-link">Projects</a>
-                <a href="#education" class="hover:text-blue-600 transition-colors nav-link">Education</a>
-                <a href="#contact" class="hover:text-blue-600 transition-colors nav-link">Contact</a>
-                
-                <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="px-4 py-2 bg-blue-50 border border-blue-200 rounded-xl text-blue-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm flex items-center gap-2 font-bold">
-                    <i data-lucide="file-text" class="w-4 h-4"></i> Resume
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-zincCustom-600">
+                <a href="#overview" class="hover:text-brand-600 transition-colors nav-link">Overview</a>
+                <a href="#projects" class="hover:text-brand-600 transition-colors nav-link">Work (12)</a>
+                <a href="#experience" class="hover:text-brand-600 transition-colors nav-link">Experience</a>
+                <a href="#skills" class="hover:text-brand-600 transition-colors nav-link">Stack</a>
+                <a href="#contact" class="hover:text-brand-600 transition-colors nav-link">Contact</a>
+            </nav>
+
+            <!-- Status Indicator + CTA -->
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-[11px] font-bold text-emerald-700">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Available for Work
+                </div>
+                <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="px-4 py-2 bg-zincCustom-900 hover:bg-brand-600 text-white text-xs font-bold rounded-full transition-all shadow-sm flex items-center gap-1.5">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                    <span>Resume</span>
                 </a>
+                <button id="menu-toggle" class="md:hidden text-zincCustom-800 p-1.5" aria-label="Toggle Menu">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
             </div>
-
-            <!-- Mobile Toggle -->
-            <button id="mobile-menu-btn" class="lg:hidden text-slate-700 hover:text-blue-600 p-2" aria-label="Toggle Navigation">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
         </div>
 
-        <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-lg border-b border-slate-200 px-6 py-6 flex-col gap-4 text-sm font-semibold uppercase tracking-wider text-slate-700">
-            <a href="#home" class="mobile-nav-link hover:text-blue-600 py-2 border-b border-slate-100">Home</a>
-            <a href="#about" class="mobile-nav-link hover:text-blue-600 py-2 border-b border-slate-100">About</a>
-            <a href="#experience" class="mobile-nav-link hover:text-blue-600 py-2 border-b border-slate-100">Experience</a>
-            <a href="#skills" class="mobile-nav-link hover:text-blue-600 py-2 border-b border-slate-100">Skills</a>
-            <a href="#projects" class="mobile-nav-link hover:text-blue-600 py-2 border-b border-slate-100">Projects</a>
-            <a href="#education" class="mobile-nav-link hover:text-blue-600 py-2 border-b border-slate-100">Education</a>
-            <a href="#contact" class="mobile-nav-link hover:text-blue-600 py-2 border-b border-slate-100">Contact</a>
-            <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="px-4 py-3 bg-blue-600 rounded-xl text-white text-center font-bold mt-2 flex items-center justify-center gap-2 shadow-md">
-                <i data-lucide="file-text" class="w-4 h-4"></i> Download Resume
-            </a>
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-nav" class="hidden md:hidden max-w-5xl mx-auto mt-2 bg-white border border-zincCustom-200 rounded-2xl p-4 shadow-xl flex-col gap-3 text-sm font-semibold text-zincCustom-700">
+            <a href="#overview" class="mobile-link py-2 border-b border-zincCustom-100">Overview</a>
+            <a href="#projects" class="mobile-link py-2 border-b border-zincCustom-100">Work (12 Projects)</a>
+            <a href="#experience" class="mobile-link py-2 border-b border-zincCustom-100">Experience</a>
+            <a href="#skills" class="mobile-link py-2 border-b border-zincCustom-100">Skills Stack</a>
+            <a href="#contact" class="mobile-link py-2">Contact Me</a>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center px-6 pt-28 pb-16 relative">
-        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center">
-            
-            <div class="lg:col-span-7 reveal">
-                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold tracking-widest uppercase mb-8 shadow-sm">
-                    <span class="w-2.5 h-2.5 bg-blue-600 rounded-full animate-pulse"></span>
-                    Available for Full Stack & AI Opportunities
-                </div>
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 pt-32">
+
+        <!-- Hero Section -->
+        <section id="home" class="px-6 pb-20">
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
                 
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black leading-[1.05] mb-8 tracking-tighter text-slate-900">
-                    BUILDING MODERN <br>
-                    <span class="gradient-text-light">FULL STACK & AI</span> <br>
-                    EXPERIENCES.
-                </h1>
-                
-                <p class="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed mb-10">
-                    Full Stack Developer specializing in the MERN Stack, Python & AI Integration. Passionate about architecting scalable enterprise systems, client ERPs, and intuitive digital applications.
-                </p>
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-brand-50 border border-brand-200 rounded-full text-brand-700 text-xs font-bold tracking-wide">
+                        <i data-lucide="code-2" class="w-4 h-4 text-brand-600"></i>
+                        <span>Full Stack MERN & AI Developer</span>
+                    </div>
 
-                <div class="flex flex-wrap gap-4 mb-10">
-                    <a href="#projects" class="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center font-bold rounded-2xl hover:scale-[1.02] transition-all shadow-[0_10px_25px_rgba(37,99,235,0.3)] gap-2">
-                        <span>Explore 12+ Projects</span>
-                        <i data-lucide="arrow-down-right" class="w-5 h-5"></i>
-                    </a>
-                    <a href="Akash_Kumar_Singh_Resume.pdf" target="_blank" class="h-14 px-8 bg-white border border-slate-200 hover:border-slate-300 text-slate-800 flex items-center justify-center font-bold rounded-2xl transition-all shadow-sm gap-2 hover:bg-slate-50">
-                        <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i> View Resume
-                    </a>
-                </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-heading font-bold text-zincCustom-950 tracking-tight leading-[1.08]">
+                        Architecting <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-indigo-600 to-brand-700">Intelligent Web Applications.</span>
+                    </h1>
 
-                <div class="flex items-center gap-4 pt-4 border-t border-slate-200/80">
-                    <span class="text-xs uppercase tracking-widest font-bold text-slate-400">Connect:</span>
-                    <div class="flex gap-3">
-                        <a href="https://github.com/akashsingg2005/" target="_blank" title="GitHub" class="w-11 h-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 hover:text-blue-600 hover:border-blue-500 hover:bg-blue-50/50 transition-all shadow-sm">
-                            <i data-lucide="github" class="w-5 h-5"></i>
+                    <p class="text-base sm:text-lg text-zincCustom-600 max-w-xl leading-relaxed">
+                        Full Stack Software Developer from Roorkee, India. Specialized in building production-ready ERP business systems, AI-driven platforms with Google Gemini API, and responsive web apps.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="#projects" class="px-7 py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-2xl transition-all shadow-lg shadow-brand-600/25 flex items-center gap-2 text-sm">
+                            <span>Explore 12 Projects</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </a>
-                        <a href="https://linkedin.com/in/akashsingh2005" target="_blank" title="LinkedIn" class="w-11 h-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 hover:text-blue-600 hover:border-blue-500 hover:bg-blue-50/50 transition-all shadow-sm">
-                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        <a href="#contact" class="px-7 py-3.5 bg-white border border-zincCustom-200 hover:border-zincCustom-300 text-zincCustom-800 font-bold rounded-2xl transition-all shadow-sm flex items-center gap-2 text-sm">
+                            <i data-lucide="mail" class="w-4 h-4 text-brand-600"></i>
+                            <span>Get in Touch</span>
                         </a>
-                        <a href="https://leetcode.com/u/akashsingg2005/" target="_blank" title="LeetCode" class="w-11 h-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-amber-600 hover:border-amber-500 hover:bg-amber-50/50 transition-all shadow-sm">
-                            <i data-lucide="code-2" class="w-5 h-5"></i>
-                        </a>
-                        <a href="https://www.hackerrank.com/profile/akashsingg2005" target="_blank" title="HackerRank" class="w-11 h-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-emerald-600 hover:border-emerald-500 hover:bg-emerald-50/50 transition-all shadow-sm">
-                            <i data-lucide="terminal" class="w-5 h-5"></i>
-                        </a>
-                        <a href="mailto:akashsingg2005@gmail.com" title="Email" class="w-11 h-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-rose-600 hover:border-rose-500 hover:bg-rose-50/50 transition-all shadow-sm">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                        </a>
+                    </div>
+
+                    <!-- Tech Stack Marquee Pills -->
+                    <div class="pt-6 flex flex-wrap items-center gap-2 text-xs font-bold text-zincCustom-500">
+                        <span class="uppercase tracking-widest text-[10px] text-zincCustom-400 mr-2">Core Stack:</span>
+                        <span class="px-3 py-1 bg-white border border-zincCustom-200 rounded-lg shadow-2xs">JavaScript</span>
+                        <span class="px-3 py-1 bg-white border border-zincCustom-200 rounded-lg shadow-2xs">React.js</span>
+                        <span class="px-3 py-1 bg-white border border-zincCustom-200 rounded-lg shadow-2xs">Node.js</span>
+                        <span class="px-3 py-1 bg-white border border-zincCustom-200 rounded-lg shadow-2xs">MongoDB</span>
+                        <span class="px-3 py-1 bg-white border border-zincCustom-200 rounded-lg shadow-2xs">Python</span>
+                        <span class="px-3 py-1 bg-white border border-zincCustom-200 rounded-lg shadow-2xs">Gemini AI</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- Profile Avatar with Floating Tech Badges -->
-            <div class="lg:col-span-5 reveal flex justify-center">
-                <div class="glow-sphere-light relative">
-                    <div class="w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden profile-shadow relative z-10 border-4 border-white shadow-2xl bg-white">
-                        <img src="Akash's Profile Photo Square frame.png" alt="Akash Kumar Singh" class="w-full h-full object-cover transition-all duration-700 hover:scale-105" onerror="this.src='https://ui-avatars.com/api/?name=Akash+Kumar+Singh&background=2563eb&color=fff&size=512'">
-                    </div>
-                    
-                    <!-- Floating Pill 1: MERN Stack -->
-                    <div class="absolute -top-4 -left-4 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-lg z-20 animate-bounce-slow">
-                        <div class="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">
-                            <i data-lucide="layers" class="w-4 h-4"></i>
+                <!-- Right Profile Visual & Code Terminal Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-xl relative overflow-hidden group">
+                        <!-- Profile Header -->
+                        <div class="flex items-center gap-4 pb-6 border-b border-zincCustom-100">
+                            <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-brand-500/30 shadow-md shrink-0">
+                                <img src="Akash's Profile Photo Square frame.png" alt="Akash Kumar Singh" class="w-full h-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Akash+Kumar+Singh&background=2563eb&color=fff'">
+                            </div>
+                            <div>
+                                <h3 class="font-heading font-bold text-lg text-zincCustom-900">Akash Kumar Singh</h3>
+                                <p class="text-xs text-zincCustom-500 font-medium">B.Tech CSE Student & Developer</p>
+                                <div class="flex items-center gap-1.5 mt-1 text-[11px] text-brand-600 font-semibold">
+                                    <i data-lucide="map-pin" class="w-3 h-3 text-rose-500"></i> Roorkee, Uttarakhand
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Expertise</p>
-                            <p class="text-xs font-bold text-slate-800">MERN & Python</p>
+
+                        <!-- Interactive Dev Console Preview -->
+                        <div class="mt-6 bg-zincCustom-950 text-zincCustom-100 rounded-2xl p-4 font-mono text-xs space-y-2.5 shadow-inner">
+                            <div class="flex items-center justify-between text-zincCustom-400 text-[10px] pb-2 border-b border-zincCustom-800">
+                                <span class="flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                    <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                </span>
+                                <span>akash.config.js</span>
+                            </div>
+                            <p class="text-emerald-400">$ developer.getInfo()</p>
+                            <p class="text-zincCustom-300">{</p>
+                            <p class="text-zincCustom-300 pl-4"><span class="text-blue-400">"status"</span>: <span class="text-amber-300">"Open for Roles"</span>,</p>
+                            <p class="text-zincCustom-300 pl-4"><span class="text-blue-400">"degree"</span>: <span class="text-amber-300">"B.Tech CSE (72%)"</span>,</p>
+                            <p class="text-zincCustom-300 pl-4"><span class="text-blue-400">"clientProjects"</span>: <span class="text-amber-300">"500+ records ERP"</span>,</p>
+                            <p class="text-zincCustom-300 pl-4"><span class="text-blue-400">"achievements"</span>: [<span class="text-amber-300">"1st Place AI Quiz"</span>, <span class="text-amber-300">"SIH Leader"</span>]</p>
+                            <p class="text-zincCustom-300">}</p>
                         </div>
-                    </div>
 
-                    <!-- Floating Pill 2: AI & Client Projects -->
-                    <div class="absolute -bottom-4 -right-4 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-lg z-20 animate-bounce-reverse">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xs">
-                            <i data-lucide="cpu" class="w-4 h-4"></i>
+                        <!-- Social Quick Links -->
+                        <div class="mt-6 flex justify-between items-center pt-2">
+                            <span class="text-xs font-bold text-zincCustom-400 uppercase tracking-wider">Social Links</span>
+                            <div class="flex gap-2">
+                                <a href="https://github.com/akashsingg2005/" target="_blank" class="w-9 h-9 rounded-xl bg-zincCustom-100 hover:bg-brand-600 hover:text-white flex items-center justify-center text-zincCustom-700 transition-colors">
+                                    <i data-lucide="github" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/akashsingh2005" target="_blank" class="w-9 h-9 rounded-xl bg-zincCustom-100 hover:bg-brand-600 hover:text-white flex items-center justify-center text-zincCustom-700 transition-colors">
+                                    <i data-lucide="linkedin" class="w-4 h-4"></i>
+                                </a>
+                                <a href="https://leetcode.com/u/akashsingg2005/" target="_blank" class="w-9 h-9 rounded-xl bg-zincCustom-100 hover:bg-amber-500 hover:text-white flex items-center justify-center text-amber-600 transition-colors">
+                                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Highlights</p>
-                            <p class="text-xs font-bold text-slate-800">12+ Live Projects</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Key Metrics / Stats Section -->
-    <section class="py-12 border-y border-slate-200 bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
-            <div class="space-y-1">
-                <h3 class="text-4xl md:text-5xl font-black text-blue-600">12+</h3>
-                <p class="text-xs uppercase tracking-widest font-bold text-slate-500">Projects Built</p>
-            </div>
-            <div class="space-y-1">
-                <h3 class="text-4xl md:text-5xl font-black text-indigo-600">5+</h3>
-                <p class="text-xs uppercase tracking-widest font-bold text-slate-500">Internships & Client Work</p>
-            </div>
-            <div class="space-y-1">
-                <h3 class="text-4xl md:text-5xl font-black text-emerald-600">1st</h3>
-                <p class="text-xs uppercase tracking-widest font-bold text-slate-500">AI Quiz Winner</p>
-            </div>
-            <div class="space-y-1">
-                <h3 class="text-4xl md:text-5xl font-black text-purple-600">500+</h3>
-                <p class="text-xs uppercase tracking-widest font-bold text-slate-500">ERP Business Records</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-28 px-6 relative">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
-            
-            <div class="lg:col-span-5 reveal">
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-                    <div class="relative aspect-square rounded-[2rem] overflow-hidden bg-white border border-slate-200 shadow-xl">
-                        <img src="Akash's Profile Photo Square frame.png" alt="Akash Kumar Singh" class="w-full h-full object-cover transition-all duration-700" onerror="this.src='https://ui-avatars.com/api/?name=Akash+Kumar+Singh&background=2563eb&color=fff&size=512'">
                     </div>
                 </div>
-            </div>
 
-            <div class="lg:col-span-7 reveal space-y-6">
+            </div>
+        </section>
+
+        <!-- Bento Grid Highlights ("At A Glance") -->
+        <section id="overview" class="px-6 py-16 bg-white border-y border-zincCustom-200/80">
+            <div class="max-w-6xl mx-auto space-y-8">
                 <div>
-                    <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-3">The Developer</h2>
-                    <h3 class="text-3xl md:text-5xl font-bold leading-tight text-slate-900">Engineering Reliable Code & Intelligent Digital Products.</h3>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Overview</span>
+                    <h2 class="text-2xl sm:text-4xl font-heading font-bold text-zincCustom-950 mt-1">Key Highlights & Impact</h2>
                 </div>
-                
-                <p class="text-slate-600 text-base md:text-lg leading-relaxed">
-                    I am a B.Tech Computer Science student at Haridwar University with strong expertise in full-stack web development (JavaScript, React, Node.js, Express, MongoDB, MySQL, Python). 
-                    From developing AI-driven ATS career suites to client-facing ERP enterprise tools managing hundreds of operational business records, I focus on clean performance, security, and scalable architecture.
-                </p>
 
-                <div class="grid sm:grid-cols-2 gap-6 pt-4">
-                    <div class="card-light p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="flex items-center gap-3 text-blue-600 font-bold mb-2">
-                            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
-                            <span>Education</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Bento Box 1 -->
+                    <div class="bg-zincCustom-50 border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:border-brand-300 transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center">
+                            <i data-lucide="briefcase" class="w-5 h-5"></i>
                         </div>
-                        <p class="text-sm font-semibold text-slate-900">B.Tech - Computer Science</p>
-                        <p class="text-xs text-slate-500">Haridwar University (72%)</p>
+                        <h3 class="font-heading font-bold text-lg text-zincCustom-900">Client ERP Solution</h3>
+                        <p class="text-xs text-zincCustom-600 leading-relaxed">
+                            Built and deployed Chakradhari Traders ERP for a real client, centralizing 500+ records into a secure MongoDB database.
+                        </p>
                     </div>
 
-                    <div class="card-light p-5 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="flex items-center gap-3 text-indigo-600 font-bold mb-2">
+                    <!-- Bento Box 2 -->
+                    <div class="bg-zincCustom-50 border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:border-indigo-300 transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-lg text-zincCustom-900">AI Platform Integration</h3>
+                        <p class="text-xs text-zincCustom-600 leading-relaxed">
+                            Engineered Resuvix AI career suite powered by Google Gemini AI, featuring ATS Resume Checker & Mock Interview Simulator.
+                        </p>
+                    </div>
+
+                    <!-- Bento Box 3 -->
+                    <div class="bg-zincCustom-50 border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:border-emerald-300 transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
                             <i data-lucide="award" class="w-5 h-5"></i>
-                            <span>Key Achievements</span>
                         </div>
-                        <p class="text-sm font-semibold text-slate-900">1st Position AI Quiz</p>
-                        <p class="text-xs text-slate-500">SIH Team Leader & UTKARSH Fest Designer</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <div class="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-sm">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-rose-500"></i> Roorkee, Uttarakhand, India
-                    </div>
-                    <div class="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-white px-4 py-2.5 rounded-xl border border-slate-200 shadow-sm">
-                        <i data-lucide="mail" class="w-4 h-4 text-blue-600"></i> akashsingg2005@gmail.com
+                        <h3 class="font-heading font-bold text-lg text-zincCustom-900">1st Rank & Leadership</h3>
+                        <p class="text-xs text-zincCustom-600 leading-relaxed">
+                            Secured 1st Position in AI Quiz Competition and served as Team Leader for Smart India Hackathon smart city solution.
+                        </p>
                     </div>
                 </div>
             </div>
+        </section>
 
-        </div>
-    </section>
-
-    <!-- Work Experience & Internships Section -->
-    <section id="experience" class="py-28 px-6 bg-slate-100/60 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-3">Industry Experience</h2>
-                <h3 class="text-3xl md:text-5xl font-bold text-slate-900">Internships & Client Projects</h3>
-            </div>
-
-            <div class="max-w-4xl mx-auto relative border-l-2 border-blue-500/30 ml-4 md:ml-auto space-y-12 pl-6 md:pl-10">
+        <!-- Fresh Interactive Projects Showcase -->
+        <section id="projects" class="px-6 py-24">
+            <div class="max-w-6xl mx-auto space-y-10">
                 
-                <!-- Exp 1 -->
-                <div class="relative reveal group">
-                    <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-blue-600 border-4 border-slate-100 group-hover:scale-125 transition-transform shadow-md"></div>
-                    <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                            <div>
-                                <h4 class="text-xl font-bold text-slate-900">Web Developer Intern</h4>
-                                <p class="text-blue-600 text-sm font-semibold">Prabandhan’26, IIT Kanpur & EISystems Services</p>
-                            </div>
-                            <span class="px-3 py-1 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-xs font-bold">Jun 2026 – Jul 2026</span>
-                        </div>
-                        <ul class="space-y-2 text-slate-600 text-sm list-disc list-inside leading-relaxed">
-                            <li>Developed ExpenseFlow Pro, a personal finance and expense management system using HTML5, CSS3, Bootstrap 5, and JavaScript.</li>
-                            <li>Engineered transaction tracking, dashboard analytics, income/expense calculations, filtering, and LocalStorage data operations.</li>
-                        </ul>
+                <!-- Section Header + Controls -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Selected Work</span>
+                        <h2 class="text-3xl sm:text-5xl font-heading font-bold text-zincCustom-950 mt-1">12 Projects Showcase</h2>
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="flex flex-wrap gap-2" id="fresh-filter-tabs">
+                        <button data-fresh-filter="all" class="fresh-tab active">All (12)</button>
+                        <button data-fresh-filter="ai" class="fresh-tab">AI & Full-Stack</button>
+                        <button data-fresh-filter="enterprise" class="fresh-tab">Enterprise & Client</button>
+                        <button data-fresh-filter="tools" class="fresh-tab">Utilities & Tools</button>
                     </div>
                 </div>
 
-                <!-- Exp 2 -->
-                <div class="relative reveal group">
-                    <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-indigo-600 border-4 border-slate-100 group-hover:scale-125 transition-transform shadow-md"></div>
-                    <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                            <div>
-                                <h4 class="text-xl font-bold text-slate-900">Freelance Full Stack Developer</h4>
-                                <p class="text-indigo-600 text-sm font-semibold">Chakradhari Traders ERP (Client Project)</p>
-                            </div>
-                            <span class="px-3 py-1 bg-indigo-50 border border-indigo-200 rounded-full text-indigo-700 text-xs font-bold">May 2026 – Present</span>
-                        </div>
-                        <ul class="space-y-2 text-slate-600 text-sm list-disc list-inside leading-relaxed">
-                            <li>Delivered a production-ready ERP solution for a real client, digitizing inventory, billing, sales, purchase, and customer management processes.</li>
-                            <li>Centralized 500+ business records into a secure MongoDB database, drastically cutting down manual overhead.</li>
-                            <li>Engineered secure RESTful APIs, JWT authentication, and responsive client dashboards.</li>
-                        </ul>
-                    </div>
+                <!-- Instant Search Input -->
+                <div class="relative max-w-lg">
+                    <i data-lucide="search" class="w-4 h-4 text-zincCustom-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="fresh-search-input" placeholder="Type to filter projects (e.g. Gemini, Node, React, ERP)..." class="w-full bg-white border border-zincCustom-200 rounded-2xl pl-11 pr-4 py-3 text-xs text-zincCustom-800 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 transition-all shadow-sm">
                 </div>
 
-                <!-- Exp 3 -->
-                <div class="relative reveal group">
-                    <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-cyan-600 border-4 border-slate-100 group-hover:scale-125 transition-transform shadow-md"></div>
-                    <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                            <div>
-                                <h4 class="text-xl font-bold text-slate-900">Python Full Stack Virtual Intern</h4>
-                                <p class="text-cyan-700 text-sm font-semibold">AICTE EduSkills Academy</p>
+                <!-- Projects List Cards (Fresh Card Design with Numbering) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="fresh-projects-grid">
+                    
+                    <!-- 01. Resuvix AI -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-brand-500/40 transition-all flex flex-col justify-between" data-cat="ai" data-tags="node express mongodb gemini razorpay cloudflare ai career">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-brand-600">01 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-brand-50 text-brand-700 font-sans font-bold rounded-full text-[10px]">AI Platform</span>
                             </div>
-                            <span class="px-3 py-1 bg-cyan-50 border border-cyan-200 rounded-full text-cyan-700 text-xs font-bold">Apr 2026 – Jun 2026</span>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">Resuvix AI</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Full-stack AI career platform featuring ATS resume checker, AI resume builder, cover letter generator, and AI technical/HR mock interview simulator.
+                            </p>
                         </div>
-                        <ul class="space-y-2 text-slate-600 text-sm list-disc list-inside leading-relaxed">
-                            <li>Completed an intensive 8-week Python Full Stack virtual program building web projects using Python, Django, HTML, CSS, JavaScript, and MySQL.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Exp 4 -->
-                <div class="relative reveal group">
-                    <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-emerald-600 border-4 border-slate-100 group-hover:scale-125 transition-transform shadow-md"></div>
-                    <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                            <div>
-                                <h4 class="text-xl font-bold text-slate-900">Python Full Stack Developer Intern</h4>
-                                <p class="text-emerald-700 text-sm font-semibold">EduSkills Academy</p>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Node.js</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Gemini AI</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">MongoDB</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Razorpay</span>
                             </div>
-                            <span class="px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-full text-emerald-700 text-xs font-bold">Dec 2025 – Mar 2026</span>
-                        </div>
-                        <ul class="space-y-2 text-slate-600 text-sm list-disc list-inside leading-relaxed">
-                            <li>Developed responsive web interfaces and connected dynamic frontend modules to MySQL database architectures.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Exp 5 -->
-                <div class="relative reveal group">
-                    <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-purple-600 border-4 border-slate-100 group-hover:scale-125 transition-transform shadow-md"></div>
-                    <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                            <div>
-                                <h4 class="text-xl font-bold text-slate-900">Full Stack Development Intern</h4>
-                                <p class="text-purple-700 text-sm font-semibold">CertED Technologies – Haridwar University</p>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://resuvix-ai.pages.dev/" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/Resuvix-AI" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
                             </div>
-                            <span class="px-3 py-1 bg-purple-50 border border-purple-200 rounded-full text-purple-700 text-xs font-bold">Jun 2025 – Jul 2025</span>
                         </div>
-                        <ul class="space-y-2 text-slate-600 text-sm list-disc list-inside leading-relaxed">
-                            <li>Built responsive frontend applications and integrated full-stack workflows using HTML, CSS, JavaScript, and backend databases.</li>
-                        </ul>
                     </div>
-                </div>
 
-                <!-- Exp 6 -->
-                <div class="relative reveal group">
-                    <div class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-amber-600 border-4 border-slate-100 group-hover:scale-125 transition-transform shadow-md"></div>
-                    <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                        <div class="flex flex-wrap justify-between items-start gap-2 mb-4">
-                            <div>
-                                <h4 class="text-xl font-bold text-slate-900">Team Leader – Smart India Hackathon</h4>
-                                <p class="text-amber-700 text-sm font-semibold">Smart City Solution Project</p>
+                    <!-- 02. Chakradhari Traders ERP -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-indigo-500/40 transition-all flex flex-col justify-between" data-cat="enterprise" data-tags="node express mongodb erp client billing inventory">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-indigo-600">02 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-indigo-50 text-indigo-700 font-sans font-bold rounded-full text-[10px]">Client Project</span>
                             </div>
-                            <span class="px-3 py-1 bg-amber-50 border border-amber-200 rounded-full text-amber-700 text-xs font-bold">Sep 2025 – Nov 2025</span>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">Chakradhari Traders ERP</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Business data management system for trading company, digitizing inventory, billing, sales, purchase, and customer management (500+ records).
+                            </p>
                         </div>
-                        <ul class="space-y-2 text-slate-600 text-sm list-disc list-inside leading-relaxed">
-                            <li>Led a 4-member development team to architect and build a crowdsourced smart city issue reporting & resolution platform.</li>
-                        </ul>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Node.js</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Express</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">MongoDB</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JWT Auth</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://chakradhari-traders.vercel.app/" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/chakradhari-traders-erp" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
+                    <!-- 03. CityFix AI -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-cyan-500/40 transition-all flex flex-col justify-between" data-cat="ai" data-tags="node express mongodb ai civics city complaint admin">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-cyan-600">03 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-cyan-50 text-cyan-700 font-sans font-bold rounded-full text-[10px]">AI & Civics</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">CityFix AI</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                AI-powered smart city complaint management platform featuring citizen, officer, and admin role-based dashboards with image tracking.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Node.js</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Express</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">MongoDB</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Role-Based</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://cityfix-ai.vercel.app" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/CityFix-AI" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 04. Better City Resolution -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-amber-500/40 transition-all flex flex-col justify-between" data-cat="ai" data-tags="sih hackathon html css js civics resolution">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-amber-600">04 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-amber-50 text-amber-700 font-sans font-bold rounded-full text-[10px]">SIH Hackathon</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">Better City Resolution</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Crowdsourced civic issue reporting and resolution platform built during Smart India Hackathon with intuitive reporting flows.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">HTML5</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">CSS3</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JavaScript</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">REST API</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://better-city-resolution.vercel.app" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/Better-City-Resolution" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 05. ExpenseFlow Pro -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-emerald-500/40 transition-all flex flex-col justify-between" data-cat="tools" data-tags="bootstrap html css js finance expense internship iit kanpur">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-emerald-600">05 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 font-sans font-bold rounded-full text-[10px]">IIT Kanpur Project</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">ExpenseFlow Pro</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Personal finance and expense manager built during Prabandhan'26 IIT Kanpur internship, featuring analytics and LocalStorage handling.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">HTML5</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Bootstrap 5</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JavaScript</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Analytics</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://expenseflow-pro.vercel.app" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/ExpenseFlow-Pro" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 06. Task Management System -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-purple-500/40 transition-all flex flex-col justify-between" data-cat="enterprise" data-tags="node express mongodb jwt auth tasks task management">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-purple-600">06 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-purple-50 text-purple-700 font-sans font-bold rounded-full text-[10px]">Full Stack</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">Task Management System</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Secure task tracking web app featuring JWT authentication, role-based user management, and REST API backend.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Node.js</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Express</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">MongoDB</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JWT</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://task-management-system-gx89.onrender.com/login.html" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/Task-Management-System" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 07. SkyCast Weather Forecast -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all flex flex-col justify-between" data-cat="tools" data-tags="javascript weather api skycast html css forecast">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-blue-600">07 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-blue-50 text-blue-700 font-sans font-bold rounded-full text-[10px]">Web App</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">SkyCast Weather</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Daily weather forecasting web app providing local, national, and global weather insights with real-time temperature and condition metrics.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JavaScript</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Weather API</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">HTML5/CSS3</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://sky-cast-weather-forecast.vercel.app/" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/SkyCast" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 08. ExpenseFlow -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-teal-500/40 transition-all flex flex-col justify-between" data-cat="tools" data-tags="html css js expense tracker finance">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-teal-600">08 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-teal-50 text-teal-700 font-sans font-bold rounded-full text-[10px]">Finance Tool</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">ExpenseFlow</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Sleek and fast personal finance tracking web application designed for instant income and expense calculations.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">HTML5</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">CSS3</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JavaScript</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://expensflow.vercel.app" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/ExpenseFlow" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 09. QR Code Generator -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-pink-500/40 transition-all flex flex-col justify-between" data-cat="tools" data-tags="html css js qr generator utility tool">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-pink-600">09 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-pink-50 text-pink-700 font-sans font-bold rounded-full text-[10px]">Utility</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">QR Code Generator</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Lightweight custom QR code generator enabling instant conversion of text, links, and contact data into downloadable QR codes.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">HTML5</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">CSS3</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JavaScript</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://qr-code-generator-babusaheb.vercel.app" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/qr-code-generator-babusaheb" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10. SkillSwap -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-rose-500/40 transition-all flex flex-col justify-between" data-cat="tools" data-tags="javascript node peer skills exchange">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-rose-600">10 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-rose-50 text-rose-700 font-sans font-bold rounded-full text-[10px]">Platform</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">SkillSwap</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Peer-to-peer skill sharing & exchange network connecting learners and mentors to swap technical skills and collaborate.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JavaScript</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Node.js</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Web App</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://github.com/akashsingg2005/skillswap" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub Repo <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. PG Life -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-violet-500/40 transition-all flex flex-col justify-between" data-cat="tools" data-tags="php mysql html css js accommodation pg hostels">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-violet-600">11 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-violet-50 text-violet-700 font-sans font-bold rounded-full text-[10px]">Full Stack</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">PG Life</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Student accommodation and hostel finding system with property filters, amenity checklists, and MySQL database backend.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">PHP</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">MySQL</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">HTML5/CSS3</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://github.com/akashsingg2005/PG-Life" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub Repo <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12. Personal Portfolio -->
+                    <div class="fresh-project-card bg-white border border-zincCustom-200 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:border-brand-500/40 transition-all flex flex-col justify-between" data-cat="tools" data-tags="html tailwind javascript portfolio web app">
+                        <div>
+                            <div class="flex items-center justify-between text-xs font-mono text-zincCustom-400 mb-4">
+                                <span class="font-bold text-brand-600">12 / PROJECT</span>
+                                <span class="px-2.5 py-0.5 bg-brand-50 text-brand-700 font-sans font-bold rounded-full text-[10px]">Personal Site</span>
+                            </div>
+                            <h3 class="font-heading font-bold text-xl text-zincCustom-900 mb-2">Personal Portfolio</h3>
+                            <p class="text-xs text-zincCustom-600 leading-relaxed mb-6">
+                                Brand new interactive portfolio showcasing all 12 projects, fresh modern editorial design, developer console preview, and interactive experience tab reader.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-1.5 mb-6 text-[10px] font-bold text-zincCustom-600">
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">HTML5</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 bg-zincCustom-100 rounded-lg">JavaScript</span>
+                            </div>
+                            <div class="flex items-center gap-4 pt-4 border-t border-zincCustom-100 text-xs font-bold">
+                                <a href="https://personal-portfolio-akash.vercel.app/" target="_blank" class="text-brand-600 hover:text-brand-800 flex items-center gap-1">
+                                    Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                                </a>
+                                <a href="https://github.com/akashsingg2005/Personal-Portfolio" target="_blank" class="text-zincCustom-500 hover:text-zincCustom-900 flex items-center gap-1">
+                                    GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Technical Skills Section -->
-    <section id="skills" class="py-28 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-3">Tech Arsenal</h2>
-                <h3 class="text-3xl md:text-5xl font-bold text-slate-900">Skills & Technologies</h3>
+        <!-- Fresh Interactive Experience Tab Reader -->
+        <section id="experience" class="px-6 py-24 bg-white border-y border-zincCustom-200/80">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Career Blueprint</span>
+                    <h2 class="text-3xl sm:text-5xl font-heading font-bold text-zincCustom-950 mt-1">Experience & Internships</h2>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <!-- Left Tab Buttons -->
+                    <div class="lg:col-span-4 flex flex-col gap-2" id="exp-tab-buttons">
+                        <button data-exp="0" class="exp-btn active text-left p-4 rounded-2xl border transition-all">
+                            <p class="text-xs text-brand-600 font-bold">Jun 2026 – Jul 2026</p>
+                            <h4 class="font-heading font-bold text-sm text-zincCustom-900">Web Developer Intern</h4>
+                            <p class="text-xs text-zincCustom-500">Prabandhan’26, IIT Kanpur</p>
+                        </button>
+
+                        <button data-exp="1" class="exp-btn text-left p-4 rounded-2xl border transition-all">
+                            <p class="text-xs text-zincCustom-500 font-bold">May 2026 – Present</p>
+                            <h4 class="font-heading font-bold text-sm text-zincCustom-900">Freelance Developer</h4>
+                            <p class="text-xs text-zincCustom-500">Chakradhari Traders ERP</p>
+                        </button>
+
+                        <button data-exp="2" class="exp-btn text-left p-4 rounded-2xl border transition-all">
+                            <p class="text-xs text-zincCustom-500 font-bold">Apr 2026 – Jun 2026</p>
+                            <h4 class="font-heading font-bold text-sm text-zincCustom-900">Python Full Stack Intern</h4>
+                            <p class="text-xs text-zincCustom-500">AICTE EduSkills Academy</p>
+                        </button>
+
+                        <button data-exp="3" class="exp-btn text-left p-4 rounded-2xl border transition-all">
+                            <p class="text-xs text-zincCustom-500 font-bold">Dec 2025 – Mar 2026</p>
+                            <h4 class="font-heading font-bold text-sm text-zincCustom-900">Python Dev Intern</h4>
+                            <p class="text-xs text-zincCustom-500">EduSkills Academy</p>
+                        </button>
+
+                        <button data-exp="4" class="exp-btn text-left p-4 rounded-2xl border transition-all">
+                            <p class="text-xs text-zincCustom-500 font-bold">Jun 2025 – Jul 2025</p>
+                            <h4 class="font-heading font-bold text-sm text-zincCustom-900">Full Stack Intern</h4>
+                            <p class="text-xs text-zincCustom-500">CertED Technologies</p>
+                        </button>
+
+                        <button data-exp="5" class="exp-btn text-left p-4 rounded-2xl border transition-all">
+                            <p class="text-xs text-zincCustom-500 font-bold">Sep 2025 – Nov 2025</p>
+                            <h4 class="font-heading font-bold text-sm text-zincCustom-900">Team Leader (SIH)</h4>
+                            <p class="text-xs text-zincCustom-500">Smart India Hackathon</p>
+                        </button>
+                    </div>
+
+                    <!-- Right Display Box -->
+                    <div class="lg:col-span-8 bg-zincCustom-50 border border-zincCustom-200 rounded-3xl p-8 shadow-sm" id="exp-display-box">
+                        <span class="px-3 py-1 bg-brand-50 border border-brand-200 rounded-full text-brand-700 text-xs font-bold" id="exp-period">Jun 2026 – Jul 2026</span>
+                        <h3 class="font-heading font-bold text-2xl text-zincCustom-950 mt-4" id="exp-title">Web Developer Intern</h3>
+                        <p class="text-sm font-semibold text-brand-600 mb-6" id="exp-org">Prabandhan’26, IIT Kanpur & EISystems Services</p>
+                        
+                        <div class="space-y-3 text-xs sm:text-sm text-zincCustom-700 leading-relaxed" id="exp-details">
+                            <p>• Developed ExpenseFlow Pro, a personal finance and expense management system using HTML5, CSS3, Bootstrap 5, and JavaScript.</p>
+                            <p>• Implemented transaction management, dashboard analytics, income/expense calculations, search/filter functionality, reports, and LocalStorage data operations.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+        <!-- Fresh Tech Arsenal Grid -->
+        <section id="skills" class="px-6 py-24">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Tech Matrix</span>
+                    <h2 class="text-3xl sm:text-5xl font-heading font-bold text-zincCustom-950 mt-1">Skills & Capabilities</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="bg-white border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                            <i data-lucide="code" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-base text-zincCustom-900">Languages</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-semibold text-zincCustom-700">
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">JavaScript (ES6+)</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Python</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">HTML5</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">CSS3</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">SQL</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                            <i data-lucide="layout" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-base text-zincCustom-900">Frontend</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-semibold text-zincCustom-700">
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">React.js</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Tailwind CSS</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Bootstrap 5</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Responsive Web</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center">
+                            <i data-lucide="server" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-base text-zincCustom-900">Backend & APIs</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-semibold text-zincCustom-700">
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Node.js</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Express.js</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">REST APIs</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">JWT Authentication</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                            <i data-lucide="database" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-base text-zincCustom-900">Databases</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-semibold text-zincCustom-700">
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">MongoDB Atlas</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">MySQL</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Mongoose ORM</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                            <i data-lucide="bot" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-base text-zincCustom-900">AI & Deployment</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-semibold text-zincCustom-700">
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Google Gemini AI</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Razorpay API</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Vercel & Render</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-zincCustom-200 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all">
+                        <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                            <i data-lucide="wrench" class="w-5 h-5"></i>
+                        </div>
+                        <h4 class="font-heading font-bold text-base text-zincCustom-900">Tools & Core</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-semibold text-zincCustom-700">
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Git & GitHub</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Postman API</span>
+                            <span class="px-3 py-1.5 bg-zincCustom-100 rounded-xl">Data Structures</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Achievements Split Card -->
+        <section class="px-6 py-16 bg-white border-t border-zincCustom-200/80">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
                 
-                <!-- Category 1 -->
-                <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-6">
-                        <i data-lucide="code" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-4">Languages</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-pill-light">JavaScript (ES6+)</span>
-                        <span class="skill-pill-light">Python</span>
-                        <span class="skill-pill-light">HTML5</span>
-                        <span class="skill-pill-light">CSS3</span>
-                        <span class="skill-pill-light">SQL</span>
-                    </div>
-                </div>
-
-                <!-- Category 2 -->
-                <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-6">
-                        <i data-lucide="layout" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-4">Frontend Development</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-pill-light">React.js</span>
-                        <span class="skill-pill-light">Tailwind CSS</span>
-                        <span class="skill-pill-light">Bootstrap 5</span>
-                        <span class="skill-pill-light">Responsive Design</span>
-                        <span class="skill-pill-light">DOM Manipulation</span>
-                    </div>
-                </div>
-
-                <!-- Category 3 -->
-                <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md hover:border-cyan-300 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-cyan-50 flex items-center justify-center text-cyan-600 mb-6">
-                        <i data-lucide="server" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-4">Backend & APIs</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-pill-light">Node.js</span>
-                        <span class="skill-pill-light">Express.js</span>
-                        <span class="skill-pill-light">RESTful APIs</span>
-                        <span class="skill-pill-light">JWT Auth</span>
-                        <span class="skill-pill-light">Django</span>
-                    </div>
-                </div>
-
-                <!-- Category 4 -->
-                <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6">
-                        <i data-lucide="database" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-4">Databases</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-pill-light">MongoDB Atlas</span>
-                        <span class="skill-pill-light">MySQL</span>
-                        <span class="skill-pill-light">Mongoose ORM</span>
-                        <span class="skill-pill-light">DBMS & CRUD</span>
-                    </div>
-                </div>
-
-                <!-- Category 5 -->
-                <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md hover:border-purple-300 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-purple-600 mb-6">
-                        <i data-lucide="bot" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-4">AI & Deployment</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-pill-light">Google Gemini AI</span>
-                        <span class="skill-pill-light">Razorpay API</span>
-                        <span class="skill-pill-light">Vercel</span>
-                        <span class="skill-pill-light">Render</span>
-                        <span class="skill-pill-light">Cloudflare Pages</span>
-                    </div>
-                </div>
-
-                <!-- Category 6 -->
-                <div class="card-light p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-md hover:border-amber-300 transition-all">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 mb-6">
-                        <i data-lucide="wrench" class="w-6 h-6"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-4">Tools & Core Concepts</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-pill-light">Git & GitHub</span>
-                        <span class="skill-pill-light">VS Code</span>
-                        <span class="skill-pill-light">Postman API</span>
-                        <span class="skill-pill-light">Data Structures</span>
-                        <span class="skill-pill-light">OOP Concepts</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-28 px-6 bg-slate-100/60 relative">
-        <div class="max-w-7xl mx-auto">
-            
-            <div class="text-center mb-12 reveal">
-                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-3">Complete Work</h2>
-                <h3 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Featured Projects & Applications</h3>
-                <p class="text-slate-600 max-w-xl mx-auto text-sm">Explore all 12 projects built across AI Platforms, Enterprise ERPs, Full-Stack Applications, and Developer Utilities.</p>
-            </div>
-
-            <!-- Filters & Search Bar -->
-            <div class="max-w-4xl mx-auto mb-12 reveal space-y-6">
-                <!-- Search Input -->
-                <div class="relative">
-                    <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                    <input type="text" id="project-search" placeholder="Search projects by name, technology (e.g. Gemini, MongoDB, React, Node)..." class="w-full bg-white border border-slate-200 pl-12 pr-4 py-4 rounded-2xl text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-all shadow-sm text-sm">
-                </div>
-
-                <!-- Filter Category Tabs -->
-                <div class="flex flex-wrap justify-center gap-3" id="project-filters">
-                    <button data-filter="all" class="filter-btn-light active">All Projects (12)</button>
-                    <button data-filter="ai-fullstack" class="filter-btn-light">AI & Full Stack</button>
-                    <button data-filter="enterprise" class="filter-btn-light">Enterprise & ERP</button>
-                    <button data-filter="utility" class="filter-btn-light">Utilities & Web Apps</button>
-                </div>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
-                
-                <!-- 1. Resuvix AI -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="ai-fullstack" data-tech="node express mongodb gemini razorpay cloudflare AI">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 border border-blue-100">
-                                <i data-lucide="sparkles" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-blue-50 text-blue-700 border-blue-200">AI Platform</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">Resuvix AI</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            AI career platform with ATS resume checker, AI resume builder, cover letter generator, and AI mock interview simulator. Integrates Google Gemini AI, Razorpay payments, and JWT security.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">Node.js</span>
-                            <span class="tech-tag-light">Express</span>
-                            <span class="tech-tag-light">MongoDB</span>
-                            <span class="tech-tag-light">Gemini AI</span>
-                            <span class="tech-tag-light">Razorpay</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://resuvix-ai.pages.dev/" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/Resuvix-AI" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Chakradhari Traders ERP -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="enterprise" data-tech="html css js node express mongodb erp client">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 border border-indigo-100">
-                                <i data-lucide="building-2" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-indigo-50 text-indigo-700 border-indigo-200">Client Project</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">Chakradhari Traders ERP</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Complete ERP Business System for a trading company. Manages inventory, billing, sales, purchases, and customer workflows with 500+ centralized MongoDB records.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">Node.js</span>
-                            <span class="tech-tag-light">Express</span>
-                            <span class="tech-tag-light">MongoDB</span>
-                            <span class="tech-tag-light">JWT</span>
-                            <span class="tech-tag-light">REST API</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://chakradhari-traders.vercel.app/" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/chakradhari-traders-erp" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. CityFix AI -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="ai-fullstack" data-tech="html css js node express mongodb ai smart city">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-cyan-50 rounded-2xl flex items-center justify-center text-cyan-600 border border-cyan-100">
-                                <i data-lucide="shield-alert" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-cyan-50 text-cyan-700 border-cyan-200">AI & Civics</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">CityFix AI</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Smart city complaint management platform. Enables citizens to report civic issues online, with role-based dashboards (Citizen, Officer, Admin), issue tracking, and image uploads.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">Node.js</span>
-                            <span class="tech-tag-light">Express</span>
-                            <span class="tech-tag-light">MongoDB</span>
-                            <span class="tech-tag-light">JWT</span>
-                            <span class="tech-tag-light">Role-Based</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://cityfix-ai.vercel.app" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/CityFix-AI" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Better City Resolution -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="ai-fullstack" data-tech="html css js sih hackathon civics crowdsourced">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 border border-amber-100">
-                                <i data-lucide="award" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-amber-50 text-amber-700 border-amber-200">SIH Hackathon</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">Better City Resolution</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Crowdsourced civic issue reporting platform built during Smart India Hackathon. Features real-time tracking, clean accessible interface, and complaint resolution workflows.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">HTML5</span>
-                            <span class="tech-tag-light">CSS3</span>
-                            <span class="tech-tag-light">JavaScript</span>
-                            <span class="tech-tag-light">REST API</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://better-city-resolution.vercel.app" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/Better-City-Resolution" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. ExpenseFlow Pro -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="utility" data-tech="html css js bootstrap finance expense internship">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 border border-emerald-100">
-                                <i data-lucide="wallet" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-emerald-50 text-emerald-700 border-emerald-200">Internship Project</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">ExpenseFlow Pro</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Personal finance & expense management system built during Prabandhan'26 IIT Kanpur internship. Includes analytics dashboards, transaction filters, and local data persistence.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">HTML5</span>
-                            <span class="tech-tag-light">Bootstrap 5</span>
-                            <span class="tech-tag-light">JavaScript</span>
-                            <span class="tech-tag-light">LocalStorage</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://expenseflow-pro.vercel.app" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/ExpenseFlow-Pro" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6. Task Management System -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="enterprise" data-tech="node express mongodb jwt auth tasks">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 border border-purple-100">
-                                <i data-lucide="check-square" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-purple-50 text-purple-700 border-purple-200">Full Stack</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">Task Management System</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Secure task tracking application featuring JWT authentication, CRUD operations, role-based user management, and REST APIs for optimized productivity.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">Node.js</span>
-                            <span class="tech-tag-light">Express</span>
-                            <span class="tech-tag-light">MongoDB</span>
-                            <span class="tech-tag-light">JWT</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://task-management-system-gx89.onrender.com/login.html" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/Task-Management-System" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 7. SkyCast Weather Forecast -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="utility" data-tech="javascript html css weather api forecast skycast">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 border border-blue-100">
-                                <i data-lucide="cloud-sun" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-blue-50 text-blue-700 border-blue-200">Web App</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">SkyCast Weather</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Modern daily weather forecasting website providing local, national, and global weather insights with real-time temperature, humidity, and condition metrics.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">JavaScript</span>
-                            <span class="tech-tag-light">HTML5</span>
-                            <span class="tech-tag-light">CSS3</span>
-                            <span class="tech-tag-light">Weather API</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://sky-cast-weather-forecast.vercel.app/" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/SkyCast" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 8. ExpenseFlow -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="utility" data-tech="html css js expense tracker finance">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-teal-50 rounded-2xl flex items-center justify-center text-teal-600 border border-teal-100">
-                                <i data-lucide="pie-chart" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-teal-50 text-teal-700 border-teal-200">Finance Tool</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">ExpenseFlow</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Fast and lightweight personal expense tracker web app designed for effortless daily transaction logs and budgeting.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">HTML5</span>
-                            <span class="tech-tag-light">CSS3</span>
-                            <span class="tech-tag-light">JavaScript</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://expensflow.vercel.app" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/ExpenseFlow" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 9. QR Code Generator -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="utility" data-tech="css html js qr generator utility tool">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 border border-pink-100">
-                                <i data-lucide="qr-code" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-pink-50 text-pink-700 border-pink-200">Utility</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">QR Code Generator</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Custom QR code generator web application enabling instant conversion of text, links, and contact data into high-res downloadable QR codes.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">HTML5</span>
-                            <span class="tech-tag-light">CSS3</span>
-                            <span class="tech-tag-light">JavaScript</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://qr-code-generator-babusaheb.vercel.app" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/qr-code-generator-babusaheb" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 10. SkillSwap -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="utility" data-tech="javascript node peer skills exchange">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-rose-50 rounded-2xl flex items-center justify-center text-rose-600 border border-rose-100">
-                                <i data-lucide="users" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-rose-50 text-rose-700 border-rose-200">Platform</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">SkillSwap</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Peer-to-peer skill sharing & exchange network connecting learners and mentors to swap technical skills and collaborate on learning paths.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">JavaScript</span>
-                            <span class="tech-tag-light">Node.js</span>
-                            <span class="tech-tag-light">Web App</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://github.com/akashsingg2005/skillswap" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub Repo <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 11. PG Life -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="utility" data-tech="php mysql html css js accommodation pg hostels">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center text-violet-600 border border-violet-100">
-                                <i data-lucide="home" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-violet-50 text-violet-700 border-violet-200">Full Stack</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">PG Life</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            Accommodation and PG finding application designed for students. Features property filtering, amenities list, and database-driven user interactions.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">PHP</span>
-                            <span class="tech-tag-light">MySQL</span>
-                            <span class="tech-tag-light">HTML5/CSS3</span>
-                            <span class="tech-tag-light">JavaScript</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://github.com/akashsingg2005/PG-Life" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub Repo <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 12. Personal Portfolio -->
-                <div class="project-card reveal card-light p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all" data-category="utility" data-tech="html tailwind javascript lucide portfolio canvas">
-                    <div>
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 border border-blue-100">
-                                <i data-lucide="sparkle" class="w-6 h-6"></i>
-                            </div>
-                            <span class="badge-pill bg-blue-50 text-blue-700 border-blue-200">Personal Site</span>
-                        </div>
-                        <h4 class="text-xl font-bold text-slate-900 mb-3">Personal Portfolio</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed mb-6">
-                            The renovated interactive portfolio showcasing all 12 projects, internship history, modern light theme aesthetic, filterable grid, and responsive UI.
-                        </p>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            <span class="tech-tag-light">HTML5</span>
-                            <span class="tech-tag-light">Tailwind CSS</span>
-                            <span class="tech-tag-light">JavaScript</span>
-                            <span class="tech-tag-light">HTML5 Canvas</span>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-slate-100">
-                            <a href="https://personal-portfolio-akash.vercel.app/" target="_blank" class="text-blue-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-blue-700">
-                                Live Demo <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-                            </a>
-                            <a href="https://github.com/akashsingg2005/Personal-Portfolio" target="_blank" class="text-slate-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 hover:text-slate-900">
-                                GitHub <i data-lucide="github" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Education & Achievements Section -->
-    <section id="education" class="py-28 px-6 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-3">Background</h2>
-                <h3 class="text-3xl md:text-5xl font-bold text-slate-900">Education & Achievements</h3>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-8 reveal">
                 <!-- Education -->
-                <div class="card-light p-10 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-                    <div class="flex items-center gap-3 text-blue-600 font-bold">
+                <div class="bg-zincCustom-50 border border-zincCustom-200 p-8 rounded-3xl space-y-4">
+                    <div class="flex items-center gap-3 text-brand-600">
                         <i data-lucide="graduation-cap" class="w-6 h-6"></i>
-                        <h4 class="text-xl font-bold text-slate-900">Academics</h4>
+                        <h3 class="font-heading font-bold text-xl text-zincCustom-900">Education</h3>
                     </div>
-
-                    <div class="border-l-2 border-blue-500/40 pl-6 space-y-2">
-                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Undergraduate Degree</span>
-                        <h5 class="text-xl font-bold text-slate-900">Bachelor of Technology (B.Tech)</h5>
-                        <p class="text-sm font-semibold text-slate-700">Computer Science & Engineering</p>
-                        <p class="text-xs text-slate-500">Haridwar University, Roorkee, Uttarakhand</p>
-                        <div class="pt-2">
-                            <span class="px-3 py-1 bg-blue-50 border border-blue-200 rounded-lg text-blue-700 text-xs font-bold">Grade: 72%</span>
-                        </div>
+                    <div>
+                        <h4 class="font-bold text-zincCustom-900 text-base">B.Tech in Computer Science & Engineering</h4>
+                        <p class="text-xs text-zincCustom-500 font-medium">Haridwar University, Roorkee, Uttarakhand</p>
+                        <p class="text-xs font-bold text-brand-600 mt-2 bg-brand-50 inline-block px-3 py-1 rounded-lg border border-brand-200">Percentage: 72%</p>
                     </div>
                 </div>
 
                 <!-- Achievements -->
-                <div class="card-light p-10 rounded-3xl border border-slate-200 shadow-sm space-y-6">
-                    <div class="flex items-center gap-3 text-indigo-600 font-bold">
+                <div class="bg-zincCustom-50 border border-zincCustom-200 p-8 rounded-3xl space-y-4">
+                    <div class="flex items-center gap-3 text-indigo-600">
                         <i data-lucide="trophy" class="w-6 h-6"></i>
-                        <h4 class="text-xl font-bold text-slate-900">Honors & Extracurriculars</h4>
+                        <h3 class="font-heading font-bold text-xl text-zincCustom-900">Achievements & Roles</h3>
                     </div>
-
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3">
-                            <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="award" class="w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h5 class="text-sm font-bold text-slate-900">1st Position – AI Quiz Competition</h5>
-                                <p class="text-xs text-slate-500">Secured top position testing expertise in Artificial Intelligence fundamentals.</p>
-                            </div>
+                    <ul class="space-y-2.5 text-xs text-zincCustom-700 font-medium">
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                            <span><strong>1st Position</strong> – AI Quiz Competition</span>
                         </li>
-
-                        <li class="flex items-start gap-3">
-                            <div class="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 border border-purple-200 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="palette" class="w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h5 class="text-sm font-bold text-slate-900">Graphic Designer – UTKARSH Cultural Fest</h5>
-                                <p class="text-xs text-slate-500">Designed promotional visual assets and media branding for UTKARSH 2023.</p>
-                            </div>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-purple-600 shrink-0"></i>
+                            <span><strong>Graphic Designer</strong> – UTKARSH Cultural Fest</span>
                         </li>
-
-                        <li class="flex items-start gap-3">
-                            <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="users-2" class="w-4 h-4"></i>
-                            </div>
-                            <div>
-                                <h5 class="text-sm font-bold text-slate-900">Active Member – Trojan Club</h5>
-                                <p class="text-xs text-slate-500">Engaged in tech workshops, hackathons, and coding community events.</p>
-                            </div>
+                        <li class="flex items-center gap-2">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-600 shrink-0"></i>
+                            <span><strong>Active Member</strong> – Trojan Tech Club</span>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Call to Action Banner -->
-    <section class="py-16 px-6">
-        <div class="max-w-5xl mx-auto bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white rounded-[3rem] p-10 md:p-14 text-center reveal shadow-2xl relative overflow-hidden">
-            <div class="absolute -right-16 -top-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
-            <h2 class="text-3xl md:text-5xl font-black mb-6 tracking-tight uppercase">Have a project in mind?</h2>
-            <p class="text-blue-100 max-w-xl mx-auto text-sm md:text-base mb-8">
-                Whether you need a custom ERP system, AI integration, or a high-performance web application, let's connect and build something great together.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4 items-center">
-                <a href="tel:+919693018965" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform flex items-center gap-2 shadow-lg">
-                    <i data-lucide="phone" class="w-5 h-5 text-blue-600"></i> Call +91 9693018965
-                </a>
-                <a href="mailto:akashsingg2005@gmail.com" class="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-all flex items-center gap-2 shadow-lg">
-                    <i data-lucide="mail" class="w-5 h-5"></i> Email Akash
-                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Form Section -->
-    <section id="contact" class="py-28 px-6 relative">
-        <div class="max-w-4xl mx-auto reveal">
-            <div class="text-center mb-16">
-                <h2 class="text-xs font-black uppercase tracking-[0.4em] text-blue-600 mb-3">Direct Communication</h2>
-                <h3 class="text-3xl md:text-5xl font-bold text-slate-900 mb-3">Get In Touch</h3>
-                <p class="text-slate-600 text-sm">Send me a message and I'll get back to you promptly.</p>
-            </div>
+        <!-- Fresh Contact Section -->
+        <section id="contact" class="px-6 py-24">
+            <div class="max-w-4xl mx-auto space-y-12">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Let's Connect</span>
+                    <h2 class="text-3xl sm:text-5xl font-heading font-bold text-zincCustom-950">Start a Project or Role</h2>
+                    <p class="text-xs sm:text-sm text-zincCustom-600">Send a message directly to akashsingg2005@gmail.com</p>
+                </div>
 
-            <div class="card-light p-8 md:p-14 rounded-[2.5rem] border border-slate-200 shadow-lg relative">
-                <form action="https://formspree.io/f/mjgeyddq" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Your Name</label>
-                        <input type="text" name="name" required placeholder="e.g. John Doe" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl focus:outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-slate-900 transition-all text-sm">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Email Address</label>
-                        <input type="email" name="email" required placeholder="e.g. john@example.com" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl focus:outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-slate-900 transition-all text-sm">
-                    </div>
-                    <div class="md:col-span-2 space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-2">Message</label>
-                        <textarea name="message" rows="5" required placeholder="Describe your project, inquiry, or opportunity..." class="w-full bg-slate-50 border border-slate-200 p-4 rounded-2xl focus:outline-none focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-slate-900 transition-all resize-none text-sm"></textarea>
-                    </div>
-                    <div class="md:col-span-2 pt-2">
-                        <button type="submit" class="w-full py-5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-[0_10px_25px_rgba(37,99,235,0.3)] hover:shadow-blue-600/40">
-                            <span>Send Message</span>
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </form>
+                <div class="bg-white border border-zincCustom-200 p-8 sm:p-12 rounded-3xl shadow-xl">
+                    <form action="https://formspree.io/f/mjgeyddq" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-zincCustom-500">Your Name</label>
+                            <input type="text" name="name" required placeholder="John Doe" class="w-full bg-zincCustom-50 border border-zincCustom-200 p-3.5 rounded-xl text-xs text-zincCustom-900 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-zincCustom-500">Email Address</label>
+                            <input type="email" name="email" required placeholder="john@example.com" class="w-full bg-zincCustom-50 border border-zincCustom-200 p-3.5 rounded-xl text-xs text-zincCustom-900 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 transition-all">
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-zincCustom-500">Your Message</label>
+                            <textarea name="message" rows="5" required placeholder="Tell me about your project or opportunity..." class="w-full bg-zincCustom-50 border border-zincCustom-200 p-3.5 rounded-xl text-xs text-zincCustom-900 focus:outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 transition-all resize-none"></textarea>
+                        </div>
+                        <div class="md:col-span-2 pt-2">
+                            <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs transition-all shadow-lg shadow-brand-600/30 flex items-center justify-center gap-2">
+                                <span>Send Message</span>
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="py-16 px-6 border-t border-slate-200 bg-white text-center relative z-10">
-        <div class="max-w-7xl mx-auto space-y-6">
-            <div class="flex justify-center items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-black text-xs shadow-md">
-                    AS
-                </div>
-                <span class="text-lg font-bold text-slate-900 tracking-wider">AKASH KUMAR SINGH</span>
-            </div>
-
-            <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-relaxed">
-                Full Stack Developer • B.Tech CSE • Roorkee, Uttarakhand, India <br>
-                © 2026 Akash Kumar Singh. All rights reserved.
-            </p>
-
-            <div class="flex justify-center gap-5 pt-2">
-                <a href="https://github.com/akashsingg2005/" target="_blank" class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-blue-600 hover:border-blue-400 transition-colors shadow-sm">
-                    <i data-lucide="github" class="w-4 h-4"></i>
-                </a>
-                <a href="https://linkedin.com/in/akashsingh2005" target="_blank" class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-600 hover:text-blue-600 hover:border-blue-400 transition-colors shadow-sm">
-                    <i data-lucide="linkedin" class="w-4 h-4"></i>
-                </a>
-                <a href="https://leetcode.com/u/akashsingg2005/" target="_blank" class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-amber-600 hover:border-amber-400 transition-colors shadow-sm">
-                    <i data-lucide="code-2" class="w-4 h-4"></i>
-                </a>
-                <a href="https://www.hackerrank.com/profile/akashsingg2005" target="_blank" class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-emerald-600 hover:border-emerald-400 transition-colors shadow-sm">
-                    <i data-lucide="terminal" class="w-4 h-4"></i>
-                </a>
-            </div>
+    <footer class="bg-white border-t border-zincCustom-200 py-12 px-6 text-center text-xs text-zincCustom-500 font-medium">
+        <div class="max-w-6xl mx-auto space-y-4">
+            <p class="font-heading font-bold text-zincCustom-900 text-base">AKASH KUMAR SINGH</p>
+            <p>Full Stack Developer | B.Tech CSE | Roorkee, Uttarakhand, India</p>
+            <p class="text-[11px] text-zincCustom-400">© 2026 Akash Kumar Singh. Built with HTML5, Tailwind CSS, & JavaScript.</p>
         </div>
     </footer>
 
