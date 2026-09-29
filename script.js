@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 5. Project Filtering & Live Search System
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterBtns = document.querySelectorAll('.filter-btn-light');
     const projectCards = document.querySelectorAll('.project-card');
     const searchInput = document.getElementById('project-search');
 
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. Interactive Neural Canvas Background
+    // 6. Interactive Light Particle Neural Canvas
     const canvas = document.getElementById('neural-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particles = [];
-            let numberOfParticles = Math.floor((canvas.width * canvas.height) / 13000);
+            let numberOfParticles = Math.floor((canvas.width * canvas.height) / 14000);
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push(new Particle());
             }
@@ -133,9 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 0.6;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
             }
             update() {
                 this.x += this.speedX;
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             draw() {
-                ctx.fillStyle = 'rgba(59, 130, 246, 0.45)';
+                ctx.fillStyle = 'rgba(37, 99, 235, 0.25)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -173,8 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     let maxDistance = (canvas.width / 7) * (canvas.height / 7);
 
                     if (distance < maxDistance && distance < 18000) {
-                        let opacity = (1 - distance / 18000) * 0.18;
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
+                        let opacity = (1 - distance / 18000) * 0.12;
+                        ctx.strokeStyle = `rgba(37, 99, 235, ${opacity})`;
                         ctx.lineWidth = 0.8;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
